@@ -1,0 +1,211 @@
+/* styles.css */
+#vote{
+    border-radius: 10px; /* 테두리 둥글게 만들기 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함하여 내용의 크기를 계산합니다 */
+    width: 1810px;
+    height: 700px;
+    display: block;
+    position: relative;
+    top: 1200px;
+    border: 1px solid white;
+    left: 50px;
+    background-color: #f8f5fd;
+}
+@media (max-width: 1200px) {
+    #vote {
+        left: 40px;
+        width: 860px;
+        top: 1500px;
+    }
+}
+.vote-bar {
+    margin-top: 50px;
+    margin-left: 100px;
+    color: black;
+}
+
+.vote-bar > h1, h2 {
+    
+    text-align: left;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.vote-item {
+	margin-top: 10px;
+	margin-left: 400px;
+	width: 1100px;
+	height: 500px;
+	border: none;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.vote-item h2 {
+	position: absolute;
+    top: 148px;
+    left: 322px;
+    text-align: center;
+}
+
+.vote-item img {
+    max-width: 35%;
+    height: auto;
+    display: block;
+    margin-top: 70px;
+    margin-left: -87px;
+}
+
+.vote-item p {
+    position: relative;
+    top: -360px;
+    margin-left: 500px;
+    margin-bottom: 100px;
+}
+
+ .button-container {
+  	display: flex;
+    flex-direction: column;
+    gap: 90px;
+    position: relative;
+    top: -580px;
+        
+    }
+
+.button-container button {
+		margin-left: 950px;
+		margin-top: 10px;
+        width: 80px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+.button-container .selected{
+		background-color: orange;
+	}
+.bar-container {
+    display: flex;
+    width: 400px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+    top: -500px;
+    left: 650px;
+}
+
+#barContainer1{
+    background-color:#FF69B4;
+    margin-top:-240px;
+    margin-left: -150px;
+}
+#barContainer2{
+    background-color: skyblue;
+    margin-top: 100px;
+    margin-left: -150px;
+}
+.bar1 {
+    position: relative;
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+.bar2 {
+    position: relative;
+    height: 100%;
+    border-radius: 5px;
+    background-color: blue;
+}
+
+
+.text-left{
+    position:absolute;
+}
+
+#text1 {
+    color:white;
+    position:absolute;
+    top:20%;
+    left:5%;
+}
+#text2{
+    position:absolute;
+    color:white;
+    top:20%;
+    left:5%;
+}
+.percentage{
+    position: absolute;
+    color: white;
+    left: 360px;
+    top: 6px;
+}
+
+
+#replyButton{
+    position: relative;
+	top: -425px;
+    left: 680px;
+    margin-left: 10px;
+    background-color: plum; /* 버튼 배경색 */
+    border: none; /* 테두리 없애기 */
+    color: white; /* 텍스트 색상 */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px; /* 버튼 모서리 둥글게 */
+    width: 150px; /* 버튼 너비 */
+    height: 75px; /* 버튼 높이 */
+}
+
+
+@media (max-width: 1200px) {
+    #replyButton1 {
+        left: auto;
+        right: 290px; /* 원하는 위치에 맞게 조정 */
+        top: 580px;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    #toggleButton1 {
+        left: auto;
+        right: 490px; /* 원하는 위치에 맞게 조정 */
+        top: 580px;
+    }
+}
+
+/* .comment-container 클래스 */
+#comment-container1 {
+    position: absolute;
+    top: 1800px;
+    left: 150px;
+    width: 1000px;
+    height: auto;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    resize: none;
+    z-index: 1000;
+    border-radius: 10px; /* 테두리를 둥글게 만듭니다. */
+    font-family: Arial, sans-serif; /* 글꼴을 지정합니다. */
+    font-size: 16px; /* 글꼴 크기를 조정합니다. */
+    color: #333; /* 글꼴 색상을 지정합니다. */
+    line-height: 1.5; /* 줄간격을 조정합니다. */
+
+}

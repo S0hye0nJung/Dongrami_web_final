@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/review.css}">
+</head>
+<body>
+
+	<header>
+	  <div class="header-container">
+	    <div class="logo-container">
+	      <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
+	      <div class="hover-content">
+	        <span class="hover-text left-text">동그</span>
+	        <div class="logo-image"></div>
+	        <span class="hover-text right-text">라미</span>
+	      </div>
+	    </div>
+
+	    <div id="right-section">
+	      <a th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+	      <div id="userDropdownContainer" style="display: none">
+	        <a href="#" id="userName" class="dropdown-toggle"></a>
+	        <div id="userDropdown" class="dropdown-menu">
+	          <a th:href="@{/mypage}">마이페이지</a>
+	          <a href="#" id="logoutButton">로그아웃</a>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</header>
+
+	<section id="nav-section">
+	     <div id="center-section">
+	       <nav id="nav">
+	         <ul>
+	           <li>
+	             <a th:href="@{/}">HOME</a>
+	           </li>
+	           <li><a th:href="@{/topic}">타로 보러가기</a></li>
+	           <li>
+	             <a th:href="@{/vote}">투표</a>
+	           </li>
+	           <li><a th:href="@{/review}">후기</a></li>
+	         </ul>
+	       </nav>
+	     </div>
+	   </section>
+
+    <div class="review-summary">
+        <h1>리뷰 <span id="review-count"></span></h1>
+        <div class="summary-content">
+            <div class="average-rating">
+                <div class="rating-score">
+                    <span class="fixed-star">★</span>
+                    <span class="rating-value"></span>
+                </div>
+                <p class="rating-details"></p>
+            </div>
+            <div class="divider"></div> <!-- 가운데 선 -->
+            <div class="satisfaction">
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="review-gallery">
+        <h2>리뷰 모아보기</h2>
+        <div class="reviews" id="reviews">
+            <!-- 리뷰 카드들이 여기에 동적으로 추가됩니다 -->
+        </div>
+    </div>
+	
+	
+	<footer>
+	  <div class="footer-wrapper">
+	    <div class="footer-company">
+	      <label class="footer-label">CIRCLE TAROT</label>
+	      <div class="description">
+	        <div class="footer-companyinfo">
+	          <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+	        </div>
+	        <div class="copyright">
+	          <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+	        </div>
+	      </div>
+	</footer>	
+	
+	
+	
+    <script th:src="@{/js/review.js}"></script>
+</body>
+</html>
+                    

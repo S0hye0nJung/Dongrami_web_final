@@ -1,0 +1,419 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.header-container {
+  background-color: #7150BD;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  height:100px; /* Fixed height */
+  position: relative; /* Add relative positioning */
+}
+
+.logo-container {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  /* You can use fixed position if you want to fix it to a specific point */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+      
+      .logo-text {
+          color: #ffffff;
+          font-weight: 700;
+          text-decoration: none;
+          font-size: 30px; /* 고정된 텍스트 크기 */
+          transition: opacity 0.3s ease-in-out;
+          display: inline-block;
+      }
+      
+      .hover-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+          white-space: nowrap;
+      }
+      
+      .logo-text:hover {
+          opacity: 0;
+      }
+      
+      .logo-text:hover + .hover-content {
+          opacity: 1;
+      }
+      
+      .hover-text {
+          color: #ffffff;
+          font-weight: 700;
+          font-size: 30px;
+          margin: 0;
+      }
+      
+      .logo-image {
+          width: 50px;
+          height: 50px;
+          background: url('/tarot_main_page/images/mainlogo.png') no-repeat center center;
+          background-size: contain;
+          animation: spin 2s infinite linear;
+          margin: 0;
+      }
+      
+      @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+      }
+
+      #right-section {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          right: 0; /* Fixed position to the right */
+          top: 50%;
+          transform: translateY(-50%);
+          padding-right: 50px; /* Optional padding for spacing */
+      }
+      
+      #right-section a {
+          color: white;
+          text-decoration: none;
+          font-size: 15px; /* Fixed font size */
+          margin-left: 20px;
+          font-weight: bold;
+      }
+      
+      #right-section a:hover {
+          text-decoration: none; /* Remove default underline */
+          box-shadow: 0 2px 0 white; /* Create a "fake" underline with a shadow */
+      }
+
+      #verticalLine {
+          position: absolute;
+          top: 50%;
+          left: 46%;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 80%;
+          background-color: white; /* 원하는 색상으로 변경 가능 */
+      }
+      
+      /* Navigation section styling */
+      #nav-section {
+          background: white;
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px solid #ccc;
+
+      }
+
+      #center-section {
+          width: 100%;
+          text-align: center;
+          padding: 10px; /* Add padding for spacing */
+      }
+
+      #nav ul {
+          list-style-type: none;
+          display: flex;
+          justify-content: center;
+      }
+
+      #nav ul li {
+          position: relative;
+          margin: 0 50px;
+      }
+
+      #nav ul li a {
+          color: #888;
+          text-decoration: none;
+          font-size: 16px;
+          font-weight: bold;
+          padding: 10px 15px;
+          transition: color 0.3s;
+          position: relative; /* 추가: 상대 위치 지정 */
+          white-space: nowrap; /* Prevent text from wrapping */
+
+      }
+
+      #nav ul li a:hover::after {
+          content: '';
+          position: absolute;
+          left: 50%; /* 선을 가운데로 맞추기 위해 왼쪽 위치를 50%로 설정 */
+          bottom: -2px; /* 밑줄 위치 조정 */
+          width: 50%; /* 선의 넓이를 줄임 */
+          height: 5px; /* 밑줄 두께 조정 */
+          background-color: #936FB0; /* 원하는 밑줄 색상 */
+          transform: translateX(-50%); /* 가운데 정렬을 위해 이동 */
+      }
+
+      
+      #nav ul li ul {
+          background-color: #38356a;
+          padding: 10px 0;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 100;
+          display: none;
+      }
+
+      #nav ul li:hover ul {
+          display: block;
+      }
+
+      #nav ul li ul li {
+          width: 100%;
+      }
+
+      #nav ul li ul li a {
+          display: block;
+          color: #fff;
+          text-decoration: none;
+          padding: 8px 20px;
+          font-size: 14px;
+          transition: background-color 0.3s;
+      }
+
+      #nav ul li ul li a:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 768px) {
+          .header-container {
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .logo-container {
+              margin-bottom: 10px;
+          }
+
+          #right-section {
+              margin-top: 10px;
+              text-align: center;
+          }
+
+          #nav-section {
+              padding: 15px 0;
+              margin-top: 0; /* Adjust margin for smaller screens */
+          }
+
+          #center-section {
+              display: none;
+          }
+
+          #nav ul {
+              flex-direction: column;
+              align-items: center;
+          }
+
+          #nav ul li {
+              margin: 5px 0;
+          }
+
+          #nav ul li ul {
+              top: 0;
+              left: 100%;
+              transform: translateY(-50%);
+          }
+
+          #nav ul li:hover ul {
+              display: none;
+          }
+
+          #nav ul li ul li {
+              width: auto;
+          }
+      }
+
+.profile-box {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 600px;
+  height: 320px;
+  text-align: center;
+  position: relative;
+  top: 50px;
+  left: 650px;
+  border-radius: 100px;
+}
+
+.profile-photo {
+  border-radius: 100px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1200px) {
+    .profile-box {
+      left: 20px; /* 좌측으로 이동 */
+      width: 60%; /* 폭 조정 */
+      margin: 0 auto; /* 가운데 정렬 */
+    }
+  }
+
+
+.username {
+  color: #333;
+  border: 1px solid #ccc;
+  width: 180px;
+  height: 50px;
+  margin-left: 190px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-link {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  display: block;
+  text-decoration: none;
+  color: #999;
+  margin-right: 150px;
+  margin-bottom: 45px;
+}
+
+.edit-link img {
+  width: 150%;
+  height: 150%;
+}
+
+.menu {
+  position: relative;
+  flex-direction: column; /* Align items vertically */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  margin-top: 100px; /* Add margin between profile-box and menu */
+  margin-left: 640px;
+}
+
+@media (max-width: 1200px) {
+    .menu {
+      margin-left: 190px;
+    }
+  }
+
+.menu > div {
+  width: 500px; /* Full width of parent container */
+  margin: 40px 0; /* Vertical margin between menu items */
+  margin-left: 60px;
+}
+
+.menu > div a {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    padding: 10px 20px;
+    background-color: #7150BD;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 100%; /* Full width of parent container */
+    height: 60px;
+}
+
+footer {
+    background-color: #7150bd;
+    color: white;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    top: 150px;
+  }
+  
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .footer-company {
+    margin-bottom: 20px;
+  }
+  
+  .footer-label {
+    font-size: 40px;
+    font-weight: bold;
+
+  }
+  
+  .footer-companyinfo {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  .footer-companyinfo p {
+    margin: 5px 0;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .footer-user {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 1200px) {
+    footer {
+      top: 150px; /* 기존에 설정된 top 속성 제거 */
+      bottom: 0; /* 화면 하단에 고정 */
+    }
+  
+    .footer-wrapper {
+      padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
+    }
+    
+    .footer-label {
+      font-size: 50px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .footer-companyinfo {
+      font-size: 12px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .copyright {
+      font-size: 10px; /* 폰트 크기를 더 작게 설정 */
+    }
+  }

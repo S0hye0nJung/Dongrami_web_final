@@ -1,0 +1,218 @@
+/* custom.css */
+.table-actions, .table, .header-row {
+    border: 1px solid #ddd; /* 테두리 추가 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 */
+    background-color: #f9f9f9;
+}
+.table-actions {
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px; /* 전체 패딩 추가 */
+    border-bottom: none; /* 아래쪽 테두리 제거 */
+    border-bottom-left-radius: 0; /* 아래쪽 둥근 모서리 제거 */
+    border-bottom-right-radius: 0; /* 아래쪽 둥근 모서리 제거 */
+}
+.table-actions button {
+    margin-right: 10px; /* 버튼 오른쪽 마진 추가 */
+    align-items: center; /* 아이콘과 텍스트를 동일선상에 위치시킴 */
+    padding: 0; /* 버튼 패딩 제거 */
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.table-actions button img.delete-icon {
+    width: 20px;
+    height: 20px;
+}
+.table-actions span {
+    margin-left: auto; /* 왼쪽으로 여백 추가하여 아이콘과 텍스트 분리 */
+}
+.table {
+    width: 100%;
+    border-collapse: collapse; /* 테두리 겹침 방지 */
+    border-top-left-radius: 0; /* 위쪽 둥근 모서리 제거 */
+    border-top-right-radius: 0; /* 위쪽 둥근 모서리 제거 */
+}
+.table th, .table td {
+    padding: 10px;
+    border: none; /* 내부 선 제거 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    vertical-align: middle; /* 수직 중앙 정렬 */
+}
+.table th {
+    background-color: #e6f7ff; /* 헤더 배경 색상 추가 */
+}
+.colored-header th {
+    background-color: #e6f7ff; /* 체크박스 항목 열에 색상 추가 */
+}
+.comment-content {
+    display: flex;
+    justify-content: space-between; /* 내용과 점 3개 버튼을 양 끝에 배치 */
+    align-items: center;
+}
+.comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.comment-date {
+    margin-right: 10px;
+    color: #888;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px; /* 모서리 둥글게 */
+    border: 1px solid #ddd; /* 전체 테두리 추가 */
+    overflow: hidden; /* 내부 경계선을 제거하기 위해 overflow 속성을 hidden으로 설정 */
+}
+.dropdown-content.show {
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+}
+.dropdown-content button {
+    background: #ffffff;
+    border: none; /* 내부 테두리 제거 */
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 0; /* 내부 테두리 제거 */
+    margin: 0; /* 내부 마진 제거 */
+    box-shadow: none; /* 버튼의 그림자 제거 */
+}
+.dropdown-content button:hover {
+    background-color: #f1f1f1; /* 호버 시 배경 색상 변경 */
+}
+.dropdown-content button + button {
+    border-top: 1px solid #ddd; /* 버튼 사이의 경계선 추가 */
+}
+.pagination {
+    text-align: center;
+    padding: 10px 0;
+}
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+.pagination button.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* 모달 창 스타일 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* 크기 조절 기능 제거 */
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* 너비를 줄여서 중앙에 맞춤 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative; /* 닫기 버튼 위치 조정을 위해 상대 위치 지정 */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group label {
+    flex: 1;
+    font-weight: bold;
+    background-color: #f5f5f5; /* 라벨 배경 색상 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top-left-radius: 5px; /* 모서리 둥글게 */
+    border-bottom-left-radius: 5px; /* 모서리 둥글게 */
+    text-align: center;
+}
+
+.form-group input, .form-group textarea {
+    flex: 3;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none; /* 크기 조절 기능 제거 */
+}
+
+.form-group input[readonly] {
+    background-color: #f5f5f5; /* 수정 불가능한 입력 필드 배경색 */
+    color: #888; /* 텍스트 색상 변경 */
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button[type="submit"] {
+    background-color: #333;
+    color: white;
+}
+
+.modal-buttons button[type="button"] {
+    background-color: #f5f5f5;
+    color: black;
+}

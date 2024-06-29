@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <title>Dongrami Tarot</title>
+   <link rel="stylesheet" th:href="@{/css/index.css}" />
+   <link rel="stylesheet" th:href="@{/css/vote.css}" />
+ </head>
+ <body>
+	
+   <header>
+     <div class="header-container">
+       <div class="logo-container">
+         <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
+         <div class="hover-content">
+           <span class="hover-text left-text">동그</span>
+           <div class="logo-image"></div>
+           <span class="hover-text right-text">라미</span>
+         </div>
+       </div>
+	   
+	   <div id="right-section">
+	      <!-- 로그인하지 않은 경우 -->
+	      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+	               
+	       <!-- 로그인한 경우 -->
+	       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
+	            <a href="#" id="userName" class="dropdown-toggle">
+	                <img src="/images/basic.png" alt="프로필 이미지" class="profile-img">
+	                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+	            </a>
+	            <div id="userDropdown" class="dropdown-menu">
+	                 <a th:href="@{/mypage}">마이페이지</a>
+	                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+	            </div>
+	        </div>
+	   </div>
+
+	   <!--
+       <div id="right-section">
+         <a th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+         <div id="userDropdownContainer" style="display: none">
+           <a href="#" id="userName" class="dropdown-toggle"></a>
+           <div id="userDropdown" class="dropdown-menu">
+             <a th:href="@{/mypage}">마이페이지</a>
+             <a href="#" id="logoutButton">로그아웃</a>
+           </div>
+         </div>
+       </div>-->
+	   
+     </div>
+   </header>
+
+   <section id="nav-section">
+     <div id="center-section">
+       <nav id="nav">
+         <ul>
+           <li>
+             <a th:href="@{/}">HOME</a>
+           </li>
+           <li><a th:href="@{/topic}">타로 보러가기</a></li>
+           <li>
+             <a th:href="@{/vote}">투표</a>
+           </li>
+           <li><a th:href="@{/review}">후기</a></li>
+         </ul>
+       </nav>
+     </div>
+   </section>
+
+    <section id="content-section">
+      <div class="banner">
+        <div class="inner-container">
+          <div class="card-container">
+            <div class="tarot-card" style="transform: rotate(-60deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드1" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(-40deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드2" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(-20deg)">
+              <img src="images/부엉이카드.jpg" alt="카드3" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(0deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드4" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(20deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드5" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(40deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드6" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(60deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드7" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(60deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드8" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(60deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드9" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(60deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드10" />
+            </div>
+            <div class="tarot-card" style="transform: rotate(60deg)">
+              <img src="/images/부엉이카드.jpg" alt="카드11" />
+            </div>
+          </div>
+          <div class="content-text">
+            <h1>동그라미 타로</h1>
+            <p>
+              당신의 운명을 밝혀줄💡 타로 카드와 함께,
+            </p>
+            <p>
+              당신의 여정을 시작하세요.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-box-container">
+        <div class="topic-box">
+          <button class="collect-button">모두 보기 ></button>
+          <div class="icon-box">
+            <a href="#"
+              ><img src="/images/logo-1.png" alt=""/>
+			</a>
+			<hr class="separator" />
+            <div class="topic-name">
+              <h2>그 사람과의 연애는?</h2>
+            </div>
+          </div>
+          <div class="icon-box">
+            <a href="#"
+              ><img src="/images/logo-2.png" alt=""/>
+			</a>
+			<hr class="separator" />
+            <div class="topic-name">
+              <h2>텅장이 통장이 될때는?</h2>
+            </div>
+          </div>
+          <div class="icon-box">
+            <a href="#"
+              ><img src="/images/logo-3.png" alt=""/>
+			</a>
+			<hr class="separator" />
+            <div class="topic-name">
+              <h2>나에게 맞는 직업은?</h2>
+            </div>
+          </div>
+          <div class="icon-box">
+            <a href="#"
+              ><img src="/images/logo-5.png" alt=""/>
+			</a>
+			<hr class="separator" />
+            <div class="topic-name">
+              <h2>나의 합격의 기운은?</h2>
+            </div>
+          </div>
+          <div class="icon-box">
+            <a href="#"
+              ><img src="/images/logo-5.png" alt=""/>
+			</a>
+			<hr class="separator" />
+            <div class="topic-name">
+              <h2>남들이 보는 내 모습은?</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+	  <div class="middle-text wrapper style1">
+	    <h2>실시간 인기🔥 타로</h2>
+	    <p>지금 실시간으로 인기 있는 타로 한눈에 보기!</p>
+	    <!-- 네비게이션섹션 -->
+	    <div class="flex-container">
+	      <!-- 왼쪽 섹션: 버블 -->
+	      <div class="left-section">
+	        <svg
+	          class="tarotRankingBubbles"
+	          viewBox="0 0 500 350"
+	          preserveAspectRatio="xMidYMid meet"
+	          role="group"
+	          aria-labelledby="title desc"
+	        >
+	          <g class="node" transform="translate(130, 50)">
+	            <svg
+	              class="item"
+	              role="list"
+	              aria-label="1순위"
+	              width="200"
+	              height="200"
+	            >
+	              <g class="ranking1">
+	                <circle r="80" cx="90" cy="100" fill="#FF6347"></circle>
+	                <g class="t-group">
+	                  <text
+	                    class="bubbleText"
+	                    fill="#ffffff"
+	                    font-size="24px"
+	                    x="90"
+	                    y="110"
+	                    text-anchor="middle"
+	                  >
+
+	                  </text>
+	                </g>
+	              </g>
+	            </svg>
+	          </g>
+	          <!-- 2위 -->
+	          <g class="node" transform="translate(280, 0)">
+	            <svg
+	              class="item"
+	              role="list"
+	              aria-label="2순위"
+	              width="200"
+	              height="200"
+	            >
+	              <g class="ranking2">
+	                <circle r="75" cx="100" cy="105" fill="#4682B4"></circle>
+	                <g class="t-group">
+	                  <text
+	                    class="bubbleText"
+	                    fill="#ffffff"
+	                    font-size="20px"
+	                    x="100"
+	                    y="110"
+	                    text-anchor="middle"
+	                  >
+
+	                  </text>
+	                </g>
+	              </g>
+	            </svg>
+	          </g>
+	          <!-- 3위 -->
+	          <g class="node" transform="translate(-20, 0)">
+	            <svg
+	              class="item"
+	              role="list"
+	              aria-label="3순위"
+	              width="200"
+	              height="200"
+	            >
+	              <g class="ranking3">
+	                <circle r="60" cx="110" cy="100" fill="#008080"></circle>
+	                <g class="t-group">
+	                  <text
+	                    class="bubbleText"
+	                    fill="#ffffff"
+	                    font-size="18px"
+	                    x="110"
+	                    y="105"
+	                    text-anchor="middle"
+	                  >
+
+	                  </text>
+	                </g>
+	              </g>
+	            </svg>
+	          </g>
+	          <!-- 4위 -->
+	          <g class="node" transform="translate(80, 180)">
+	            <svg
+	              class="item"
+	              role="list"
+	              aria-label="4순위"
+	              width="200"
+	              height="200"
+	            >
+	              <g class="ranking4">
+	                <circle r="55" cx="100" cy="100" fill="#FFD700"></circle>
+	                <g class="t-group">
+	                  <text
+	                    class="bubbleText"
+	                    fill="#ffffff"
+
+
+	                    font-size="15px"
+
+
+	                    x="100"
+	                    y="108"
+	                    text-anchor="middle"
+	                  >
+
+	                  </text>
+	                </g>
+	              </g>
+	            </svg>
+	          </g>
+	          <!-- 5위 -->
+	          <g class="node" transform="translate(300, 150)">
+	            <svg
+	              class="item"
+	              role="list"
+	              aria-label="5순위"
+	              width="200"
+	              height="200"
+	            >
+	              <g class="ranking5">
+	                <circle r="45" cx="100" cy="100" fill="#32CD32"></circle>
+	                <g class="t-group">
+	                  <text
+	                    class="bubbleText"
+	                    fill="#ffffff"
+
+	                    font-size="13px"
+
+
+	                    x="100"
+	                    y="108"
+	                    text-anchor="middle"
+	                  >
+
+	                  </text>
+	                </g>
+	              </g>
+	            </svg>
+	          </g>
+	        </svg>
+	      </div>
+	    </section>
+    
+    <!-- 투표 부분 -->
+    <section id="vote">
+      <div class="vote-bar">
+          <h1>재미로 보는 핫한 논쟁🔥</h1>
+          <h2>투표를 하고 댓글로 생각을 적어주세요😀</h2>
+      </div>
+       <div id="vote-main"></div>
+  </section>
+</div>
+
+      <footer>
+        <div class="footer-wrapper">
+          <div class="footer-company">
+            <label class="footer-label">CIRCLE TAROT</label>
+            <div class="description">
+              <div class="footer-companyinfo">
+                <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+              </div>
+              <div class="copyright">
+                <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+              </div>
+            </div>
+      </footer>
+
+	     <script th:src="@{/js/tarot_card.js}"></script>
+	     <script th:src="@{/js/vote.js}"></script>
+		 <script th:src="@{/js/bubble.js}"></script>
+	   </body>
+	  </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dongrami_tarot_Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+	<header>
+	        <div class="header-container">
+	          <div class="logo-container">
+	            <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
+	            <div class="hover-content">
+	              <span class="hover-text left-text">동그</span>
+	              <div class="logo-image"></div>
+	              <span class="hover-text right-text">라미</span>
+	            </div>
+	          </div>
+
+	          <div id="right-section">
+	            <a th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+	            <div id="userDropdownContainer" style="display: none">
+	              <a href="#" id="userName" class="dropdown-toggle"></a>
+	              <div id="userDropdown" class="dropdown-menu">
+	                <a th:href="@{/mypage}">마이페이지</a>
+	                <a href="#" id="logoutButton">로그아웃</a>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </header>
+
+	      <section id="nav-section">
+	        <div id="center-section">
+	          <nav id="nav">
+	            <ul>
+	              <li>
+	                <a th:href="@{/}">HOME</a>
+	              </li>
+	              <li><a th:href="@{/topic}">타로 보러가기</a></li>
+	              <li>
+	                <a th:href="@{/vote}">투표</a>
+	              </li>
+	              <li><a th:href="@{/review}">후기</a></li>
+	            </ul>
+	          </nav>
+	        </div>
+	      </section>
+
+	<div class="container">
+    <div class="login-container">
+        <a href=""><img th:src="@{/images/login_logo.png}" alt="Login Logo"></a>
+        <div class="login-content">로그인 및 회원가입 하기</div>
+        <div class="social-login">
+            <a th:href="@{/oauth2/authorization/naver}" class="naver"><img th:src="@{/images/naver_logo.png}" alt="Naver Icon"></a>
+            <a th:href="@{/oauth2/authorization/kakao}" class="kakao"><img th:src="@{/images/kakao_logo.png}" alt="Kakao Icon"></a>
+            <a class="google" th:href="@{/oauth2/authorization/google}">
+                <img th:src="@{/images/google_logo.png}" alt="text">
+            </a>
+            <a th:href="@{/signup}" class="login"><img th:src="@{/images/tarot_logo.png}" alt="Login Icon"></a>
+        </div>
+    </div>
+</div>
+<footer>
+        <div class="footer-wrapper">
+             <div class="footer-company">
+                 <label class="footer-label">CIRCLE TAROT</label>
+                     <div class="description">
+                         <div class="footer-companyinfo">
+                             <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+                         </div>
+                         <div class="copyright">
+                             <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+                         </div>
+                     </div>
+             </div>		
+     </footer>
+</body>
+</html>
