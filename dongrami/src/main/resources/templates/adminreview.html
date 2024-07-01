@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{/css/myreview.css}">
+  <link rel="stylesheet" th:href="@{/css/admin_review.css}">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <title>My ReviewPage</title>
+  <title>Admin ReviewPage</title>
 </head>
 <body>
 	<header>
@@ -19,22 +19,16 @@
 	                <span class="hover-text right-text">라미</span>
 	            </div>
 	        </div>
-			<div id="right-section">
-				      <!-- 로그인하지 않은 경우 -->
-				      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
-				               
-				       <!-- 로그인한 경우 -->
-				       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
-				            <a href="#" id="userName" class="dropdown-toggle">
-				                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
-				                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
-				            </a>
-				            <div id="userDropdown" class="dropdown-menu">
-				                 <a th:href="@{/mypage}">마이페이지</a>
-				                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
-				            </div>
-				        </div>
-				   </div>
+	        <div id="right-section">
+	            <a href="/login" id="loginButton">로그인 / 회원가입</a>
+	            <div id="userDropdownContainer" style="display: none">
+	                <a href="#" id="userName" class="dropdown-toggle"></a>
+	                <div id="userDropdown" class="dropdown-menu">
+	                    <a href="/mypage">마이페이지</a>
+	                    <a href="#" id="logoutButton">로그아웃</a>
+	                </div>
+	            </div>
+	        </div>
 	    </div>
 	</header>
 	<section id="nav-section">
@@ -50,7 +44,7 @@
 	    </div>
 	</section>
 	<div class="container">
-	    <h2>내가 쓴 리뷰</h2>
+	    <h2>리뷰 리스트</h2>
 	    <div id="comment-controls" class="comment-controls">
 	        <button id="delete-selected" class="delete-button">
 	            <img src="images/trash-icon.png" alt="trash icon" class="trash-icon">
@@ -125,7 +119,7 @@
 	    </div>
 	</div>
 
-	<script src="js/myreview.js"></script>
+	<script src="js/admin_review.js"></script>
 
   </body>
   </html>

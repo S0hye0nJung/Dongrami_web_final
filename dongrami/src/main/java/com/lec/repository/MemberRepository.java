@@ -12,7 +12,6 @@ public interface MemberRepository extends JpaRepository<Member, String>{
   
     // 추가된 메서드
     Member findByNickname(String nickname);
-    
     Optional<Member> findByUserId(String userId);
     Member findByEmail(String email);
     Member findByEmailAndProvider(String email, String provider);

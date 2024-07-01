@@ -28,7 +28,7 @@
 	       <!-- 로그인한 경우 -->
 	       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
 	            <a href="#" id="userName" class="dropdown-toggle">
-	                <img src="/images/basic.png" alt="프로필 이미지" class="profile-img">
+	                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
 	                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
 	            </a>
 	            <div id="userDropdown" class="dropdown-menu">
@@ -37,18 +37,6 @@
 	            </div>
 	        </div>
 	   </div>
-
-	   <!--
-       <div id="right-section">
-         <a th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
-         <div id="userDropdownContainer" style="display: none">
-           <a href="#" id="userName" class="dropdown-toggle"></a>
-           <div id="userDropdown" class="dropdown-menu">
-             <a th:href="@{/mypage}">마이페이지</a>
-             <a href="#" id="logoutButton">로그아웃</a>
-           </div>
-         </div>
-       </div>-->
 	   
      </div>
    </header>
@@ -122,9 +110,9 @@
 
       <div class="topic-box-container">
         <div class="topic-box">
-          <button class="collect-button">모두 보기 ></button>
+          <button class="collect-button" onclick="location.href='/topic'">모두 보기 ></button>
           <div class="icon-box">
-            <a href="#"
+            <a href="/tarot?subcategory_id=3"
               ><img src="/images/logo-1.png" alt=""/>
 			</a>
 			<hr class="separator" />
@@ -133,7 +121,7 @@
             </div>
           </div>
           <div class="icon-box">
-            <a href="#"
+            <a href="/tarot?subcategory_id=9"
               ><img src="/images/logo-2.png" alt=""/>
 			</a>
 			<hr class="separator" />
@@ -142,7 +130,7 @@
             </div>
           </div>
           <div class="icon-box">
-            <a href="#"
+            <a href="/tarot?subcategory_id=11"
               ><img src="/images/logo-3.png" alt=""/>
 			</a>
 			<hr class="separator" />
@@ -151,7 +139,7 @@
             </div>
           </div>
           <div class="icon-box">
-            <a href="#"
+            <a href="/tarot?subcategory_id=13"
               ><img src="/images/logo-5.png" alt=""/>
 			</a>
 			<hr class="separator" />
@@ -160,7 +148,7 @@
             </div>
           </div>
           <div class="icon-box">
-            <a href="#"
+            <a href="/tarot?subcategory_id=16"
               ><img src="/images/logo-5.png" alt=""/>
 			</a>
 			<hr class="separator" />
@@ -172,158 +160,71 @@
       </div>
 
 	  <div class="middle-text wrapper style1">
-	    <h2>실시간 인기🔥 타로</h2>
-	    <p>지금 실시간으로 인기 있는 타로 한눈에 보기!</p>
-	    <!-- 네비게이션섹션 -->
-	    <div class="flex-container">
-	      <!-- 왼쪽 섹션: 버블 -->
-	      <div class="left-section">
-	        <svg
-	          class="tarotRankingBubbles"
-	          viewBox="0 0 500 350"
-	          preserveAspectRatio="xMidYMid meet"
-	          role="group"
-	          aria-labelledby="title desc"
-	        >
-	          <g class="node" transform="translate(130, 50)">
-	            <svg
-	              class="item"
-	              role="list"
-	              aria-label="1순위"
-	              width="200"
-	              height="200"
-	            >
-	              <g class="ranking1">
-	                <circle r="80" cx="90" cy="100" fill="#FF6347"></circle>
-	                <g class="t-group">
-	                  <text
-	                    class="bubbleText"
-	                    fill="#ffffff"
-	                    font-size="24px"
-	                    x="90"
-	                    y="110"
-	                    text-anchor="middle"
-	                  >
-
-	                  </text>
-	                </g>
-	              </g>
-	            </svg>
-	          </g>
-	          <!-- 2위 -->
-	          <g class="node" transform="translate(280, 0)">
-	            <svg
-	              class="item"
-	              role="list"
-	              aria-label="2순위"
-	              width="200"
-	              height="200"
-	            >
-	              <g class="ranking2">
-	                <circle r="75" cx="100" cy="105" fill="#4682B4"></circle>
-	                <g class="t-group">
-	                  <text
-	                    class="bubbleText"
-	                    fill="#ffffff"
-	                    font-size="20px"
-	                    x="100"
-	                    y="110"
-	                    text-anchor="middle"
-	                  >
-
-	                  </text>
-	                </g>
-	              </g>
-	            </svg>
-	          </g>
-	          <!-- 3위 -->
-	          <g class="node" transform="translate(-20, 0)">
-	            <svg
-	              class="item"
-	              role="list"
-	              aria-label="3순위"
-	              width="200"
-	              height="200"
-	            >
-	              <g class="ranking3">
-	                <circle r="60" cx="110" cy="100" fill="#008080"></circle>
-	                <g class="t-group">
-	                  <text
-	                    class="bubbleText"
-	                    fill="#ffffff"
-	                    font-size="18px"
-	                    x="110"
-	                    y="105"
-	                    text-anchor="middle"
-	                  >
-
-	                  </text>
-	                </g>
-	              </g>
-	            </svg>
-	          </g>
-	          <!-- 4위 -->
-	          <g class="node" transform="translate(80, 180)">
-	            <svg
-	              class="item"
-	              role="list"
-	              aria-label="4순위"
-	              width="200"
-	              height="200"
-	            >
-	              <g class="ranking4">
-	                <circle r="55" cx="100" cy="100" fill="#FFD700"></circle>
-	                <g class="t-group">
-	                  <text
-	                    class="bubbleText"
-	                    fill="#ffffff"
-
-
-	                    font-size="15px"
-
-
-	                    x="100"
-	                    y="108"
-	                    text-anchor="middle"
-	                  >
-
-	                  </text>
-	                </g>
-	              </g>
-	            </svg>
-	          </g>
-	          <!-- 5위 -->
-	          <g class="node" transform="translate(300, 150)">
-	            <svg
-	              class="item"
-	              role="list"
-	              aria-label="5순위"
-	              width="200"
-	              height="200"
-	            >
-	              <g class="ranking5">
-	                <circle r="45" cx="100" cy="100" fill="#32CD32"></circle>
-	                <g class="t-group">
-	                  <text
-	                    class="bubbleText"
-	                    fill="#ffffff"
-
-	                    font-size="13px"
-
-
-	                    x="100"
-	                    y="108"
-	                    text-anchor="middle"
-	                  >
-
-	                  </text>
-	                </g>
-	              </g>
-	            </svg>
-	          </g>
-	        </svg>
+	      <h2>실시간 인기🔥 타로</h2>
+	      <p>지금 실시간으로 인기 있는 타로 한눈에 보기!</p>
+	      <div class="flex-container">
+	          <div class="left-section">
+	              <svg class="tarotRankingBubbles" viewBox="0 0 500 350" preserveAspectRatio="xMidYMid meet" role="group" aria-labelledby="title desc">
+	                  <!-- 1순위 -->
+	                  <g class="node" transform="translate(130, 50)">
+	                      <svg class="item" role="list" aria-label="1순위" width="200" height="200" data-subcategory-id="?">
+	                          <g class="ranking1">
+	                              <circle r="80" cx="90" cy="100" fill="#FF6347"></circle>
+	                              <g class="t-group">
+	                                  <text class="bubbleText" fill="#ffffff" font-size="24px" x="90" y="110" text-anchor="middle"></text>
+	                              </g>
+	                          </g>
+	                      </svg>
+	                  </g>
+	                  <!-- 2순위 -->
+	                  <g class="node" transform="translate(280, 0)">
+	                      <svg class="item" role="list" aria-label="2순위" width="200" height="200" data-subcategory-id="?">
+	                          <g class="ranking2">
+	                              <circle r="75" cx="100" cy="105" fill="#4682B4"></circle>
+	                              <g class="t-group">
+	                                  <text class="bubbleText" fill="#ffffff" font-size="20px" x="100" y="110" text-anchor="middle"></text>
+	                              </g>
+	                          </g>
+	                      </svg>
+	                  </g>
+	                  <!-- 3순위 -->
+	                  <g class="node" transform="translate(-20, 0)">
+	                      <svg class="item" role="list" aria-label="3순위" width="200" height="200" data-subcategory-id="?">
+	                          <g class="ranking3">
+	                              <circle r="60" cx="110" cy="100" fill="#008080"></circle>
+	                              <g class="t-group">
+	                                  <text class="bubbleText" fill="#ffffff" font-size="18px" x="110" y="105" text-anchor="middle"></text>
+	                              </g>
+	                          </g>
+	                      </svg>
+	                  </g>
+	                  <!-- 4순위 -->
+	                  <g class="node" transform="translate(80, 180)">
+	                      <svg class="item" role="list" aria-label="4순위" width="200" height="200" data-subcategory-id="?">
+	                          <g class="ranking4">
+	                              <circle r="55" cx="100" cy="100" fill="#FFD700"></circle>
+	                              <g class="t-group">
+	                                  <text class="bubbleText" fill="#ffffff" font-size="15px" x="100" y="108" text-anchor="middle"></text>
+	                              </g>
+	                          </g>
+	                      </svg>
+	                  </g>
+	                  <!-- 5순위 -->
+	                  <g class="node" transform="translate(300, 150)">
+	                      <svg class="item" role="list" aria-label="5순위" width="200" height="200" data-subcategory-id="?">
+	                          <g class="ranking5">
+	                              <circle r="45" cx="100" cy="100" fill="#32CD32"></circle>
+	                              <g class="t-group">
+	                                  <text class="bubbleText" fill="#ffffff" font-size="13px" x="100" y="108" text-anchor="middle"></text>
+	                              </g>
+	                          </g>
+	                      </svg>
+	                  </g>
+	              </svg>
+	          </div>
 	      </div>
-	    </section>
+	  </div>
+	  </section>
     
     <!-- 투표 부분 -->
     <section id="vote">
