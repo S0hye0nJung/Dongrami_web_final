@@ -17,6 +17,8 @@ import com.lec.entity.Member;
 import com.lec.service.MemberService;
 import com.lec.service.Oauth2UserServiceImplement;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class MemberController {
@@ -60,6 +62,21 @@ public class MemberController {
         }
         
         return response;
+    }
+    
+    @GetMapping("/")
+    public String home(HttpSession session, Model model) {
+        Member loggedInUser = (Member) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("userId", loggedInUser.getUserId());
+            System.out.println("사용자 아이디: " + loggedInUser.getUserId());
+            model.addAttribute("email", session.getAttribute("email"));
+            model.addAttribute("provider", session.getAttribute("provider"));
+        } else {
+            System.out.println("로그인하지 않은 사용자");
+            return "index";
+        }
+        return "index";
     }
 
 }

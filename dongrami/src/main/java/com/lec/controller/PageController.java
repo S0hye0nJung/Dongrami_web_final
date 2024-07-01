@@ -25,10 +25,6 @@ public class PageController {
         return "mypage";
     }
     
-    @GetMapping("/")
-    public String indexPage() {
-        return "index";
-    }
     
     @GetMapping("/login")
     public String loginPage() {
@@ -52,5 +48,16 @@ public class PageController {
     public String myTarotList() {
     	return "mytarotlist";
     }
+    
+    @GetMapping("/find_Id")
+    public String findId() {
+    	return "find_Id";
+    }
+    
+    @GetMapping("/find_Pwd")
+    public String findPwd() {
+    	return "find_Pwd";
+    }
+    
     
 }

@@ -9,58 +9,73 @@
 	
 </head>
 <body>
+	<!-- Header -->
+	  <header>
+	    <div class="header-container">
+	        <div class="logo-container">
+	            <a href="#" class="logo-text">CIRCLE TAROT</a>
+	            <div class="hover-content">
+	                <span class="hover-text left-text">동그</span>
+	                <div class="logo-image"></div>
+	                <span class="hover-text right-text">라미</span>
+	            </div>
+	        </div>
 
-<section id="nav-section">
-    <div id="left-section">
-        <div class="logo-container">
-            <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
-            <div class="hover-content">
-                <span class="hover-text left-text">동그</span>
-                <div class="logo-image"></div>
-                <span class="hover-text right-text">라미</span>
-            </div>
-        </div>
-    </div>
+	      <div id="right-section">
+	               <!-- 로그인하지 않은 경우 -->
+	               <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+	                        
+	                <!-- 로그인한 경우 -->
+	                <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
+	                     <a href="#" id="userName" class="dropdown-toggle">
+	                         <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
+	                         <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+	                     </a>
+	                     <div id="userDropdown" class="dropdown-menu">
+	                          <a th:href="@{/mypage}">마이페이지</a>
+	                          <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+	                     </div>
+	                 </div>
+	            </div>
+	      
+	    </div>
+	</header>
 
-    <div id="center-section">
-        <nav id="nav">
-            <ul>
-                <li>
-                    <a th:href="@{/}">연애</a>
-                    <ul>
-                        <li><a th:href="@{/love/crush}">· 짝사랑</a></li>
-                        <li><a th:href="@{/love/lover}">· 연인</a></li>
-                        <li><a th:href="@{/love/reunion}">· 재회</a></li>
-                        <li><a th:href="@{/love/future-lover}">· 미래 연인</a></li>
-                        <li><a th:href="@{/love/marriage}">· 결혼</a></li>
-                    </ul>
-                </li>
-                <li><a th:href="@{/money}">금전</a></li>
-                <li>
-                    <a th:href="@{/job}">직업</a>
-                    <ul>
-                        <li><a th:href="@{/job/pass}">· 합격운</a></li>
-                        <li><a th:href="@{/job/well}">· 일 잘풀릴까?</a></li>
-                        <li><a th:href="@{/job/recommend}">· 직업추천</a></li>
-                    </ul>
-                </li>
-                <li><a th:href="@{/relationship}">대인관계</a></li>
-                <li><a th:href="@{/mbti}">MBTI</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div id="right-section">
-        <a th:href="@{/login}" id="loginButton">로그인</a>
-        <div id="userDropdownContainer" style="display: none;">
-            <a href="#" id="userName" class="dropdown-toggle"></a>
-            <div id="userDropdown" class="dropdown-menu">
-                <a th:href="@{/mypage}">마이페이지</a>
-                <a href="#" id="logoutButton">로그아웃</a>
-            </div>
-        </div>
-        <a href="https://www.kakao.com" class="kakao-icon"><img th:src="@{/images/kakao_logo.png}" alt="카카오톡"/></a>
-    </div>
-</section>
+	<!-- Nav Bar -->
+
+	<section id="nav-section">
+	  <div id="center-section">
+	      <nav id="nav">
+	          <ul>
+	              <li>
+	                  <a href="#">HOME</a>
+	                  <!--
+	                  <ul>
+	                      <li><a href="#">짝사랑</a></li>
+	                      <li><a href="#">연인</a></li>
+	                      <li><a href="#">재회</a></li>
+	                      <li><a href="#">미래 연인</a></li>
+	                      <li><a href="#">결혼</a></li>
+	                  </ul>
+	                  -->
+	              </li>
+	              <li><a href="no-sidebar.html">타로 보러가기</a></li>
+	              <li>
+	                  <a href="#">투표</a>
+	                  <!--
+	                  <ul>
+	                      <li><a href="#">합격운</a></li>
+	                      <li><a href="#">일 잘풀릴까?</a></li>
+	                      <li><a href="#">직업추천</a></li>
+	                  </ul>
+	                  -->
+	              </li>
+	              <li><a th:href="@{/review}">후기</a></li>
+	          </ul>
+	      </nav>
+	  </div>
+	</section>
+
 
 <div class="container">
     <div class="logo">
@@ -132,6 +147,19 @@
     </div>
  </div>
 
+ <footer>
+        <div class="footer-wrapper">
+          <div class="footer-company">
+            <label class="footer-label">CIRCLE TAROT</label>
+            <div class="description">
+              <div class="footer-companyinfo">
+                <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+              </div>
+              <div class="copyright">
+                <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+              </div>
+            </div>
+      </footer>
 <script th:inline="javascript">
 	
 	function selectGender(button) {
