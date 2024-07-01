@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function initialize() {
         try {
-            await fetchComments(); // Initial comment load
-            setupEventListeners(); // Event listeners setup
-            render(); // Render comments and pagination
+            await fetchComments(); // 초기 댓글 로드
+            setupEventListeners(); // 이벤트 리스너 설정
+            render(); // 댓글과 페이지네이션 렌더링
         } catch (error) {
-            console.error('Initialization error:', error);
+            console.error('초기화 오류:', error);
         }
     }
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayComments(page) {
         const commentSection = document.getElementById('comment-section');
         if (!commentSection) {
-            console.error('Cannot find element with id "comment-section"');
+            console.error('"comment-section" id를 가진 요소를 찾을 수 없습니다.');
             return;
         }
         commentSection.innerHTML = '';
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (comments.length === 0) {
             const noCommentsRow = document.createElement('tr');
             const noCommentsCell = document.createElement('td');
-            noCommentsCell.colSpan = 6; // span all columns
+            noCommentsCell.colSpan = 6; // 모든 열을 span
             noCommentsCell.id = 'no-comments';
             noCommentsCell.textContent = '작성된 댓글이 없습니다.';
             noCommentsRow.appendChild(noCommentsCell);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderPagination(comments.length, commentsPerPage, page);
 
-        // Add event listener for "delete selected" button
+        // "선택 삭제" 버튼에 이벤트 리스너 추가
         const deleteSelectedButton = document.getElementById('delete-selected');
         if (deleteSelectedButton) {
             deleteSelectedButton.addEventListener('click', async () => {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Add event listeners for pagination buttons
+        // 페이지네이션 버튼에 이벤트 리스너 추가
         const paginationButtons = document.querySelectorAll('.page-button');
         paginationButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Add event listener for "select all" checkbox
+        // "전체 선택" 체크박스에 이벤트 리스너 추가
         const selectAllCheckbox = document.getElementById('select-all');
         if (selectAllCheckbox) {
             selectAllCheckbox.addEventListener('change', function() {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Add event listeners for individual checkboxes
+        // 개별 체크박스에 이벤트 리스너 추가
         const checkboxes = document.querySelectorAll('.select-comment');
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
@@ -112,36 +112,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    async function deleteSelectedComments() {
-        const selectedComments = document.querySelectorAll('.select-comment:checked');
-        const commentIds = Array.from(selectedComments).map(checkbox => checkbox.dataset.commentId);
+async function deleteSelectedComments() {
+    const selectedComments = document.querySelectorAll('.select-comment:checked');
+    const commentIds = Array.from(selectedComments).map(checkbox => parseInt(checkbox.dataset.commentId));
 
-        try {
-            const response = await fetch('/delete-comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ commentIds })
-            });
-
-            if (!response.ok) {
-                throw new Error('댓글 삭제에 실패했습니다.');
-            }
-
-            const data = await response.json();
-            comments = data; // Update comments with new list
-            displayComments(currentPage); // Render updated comments
-        } catch (error) {
-            console.error('Error deleting comments:', error);
-            alert('댓글 삭제에 실패했습니다. 다시 시도해 주세요.');
-        }
+    if (commentIds.length === 0) {
+        alert('삭제할 댓글을 선택해주세요.');
+        return;
     }
+
+    try {
+        const response = await fetch('/delete-comment', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ids: commentIds })
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text(); // 서버에서 보낸 오류 메시지 읽기
+            throw new Error(`댓글 삭제에 실패했습니다: ${errorMessage}`);
+        }
+
+        // 삭제 성공 시, 현재 페이지 댓글 목록 갱신
+        await fetchComments();
+        displayComments(currentPage);
+        updateSelectedCount();
+    } catch (error) {
+        console.error('댓글 삭제 오류:', error);
+        alert(`댓글 삭제 중 오류가 발생했습니다: ${error.message}`);
+    }
+}
+
+
+
 
     function renderPagination(totalComments, commentsPerPage, currentPage) {
         const paginationContainer = document.getElementById('pagination');
         if (!paginationContainer) {
-            console.error('Cannot find element with id "pagination"');
+            console.error('"pagination" id를 가진 요소를 찾을 수 없습니다.');
             return;
         }
         paginationContainer.innerHTML = '';
@@ -162,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedCount = document.querySelectorAll('.select-comment:checked').length;
         const selectedCountElement = document.getElementById('selected-count');
         if (selectedCountElement) {
-            selectedCountElement.textContent = `${selectedCount}/${commentsPerPage} 선택`; // Fixed per page count
+            selectedCountElement.textContent = `${selectedCount}/${commentsPerPage} 선택`; // 페이지당 고정된 개수
         }
     }
 
@@ -170,25 +180,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedCount = document.querySelectorAll('.select-comment:checked').length;
         const selectedCountElement = document.getElementById('selected-count');
         if (selectedCountElement) {
-            selectedCountElement.textContent = `${selectedCount}/${commentsPerPage} 선택`; // Display selected count
-            selectedCountElement.style.display = selectedCount > 0 ? 'inline' : 'none'; // Toggle display based on selected count
+            selectedCountElement.textContent = `${selectedCount}/${commentsPerPage} 선택`; // 선택된 개수 표시
+            selectedCountElement.style.display = selectedCount > 0 ? 'inline' : 'none'; // 선택된 개수에 따라 표시 여부 변경
         }
     }
 
     function setupEventListeners() {
-        // Add event listener for "edit" button click
+        // "편집" 버튼 클릭에 이벤트 리스너 추가
         const commentSection = document.getElementById('comment-section');
         if (commentSection) {
             commentSection.addEventListener('click', async (event) => {
                 if (event.target.classList.contains('edit-button')) {
                     const commentId = event.target.dataset.commentId;
-                    console.log(`Edit comment with ID ${commentId}`);
-                    // Add logic here to handle editing a specific comment (e.g., open a modal or navigate to an edit page)
+                    console.log(`ID ${commentId}의 댓글 편집`);
+                    // 여기에 특정 댓글 편집을 처리하는 로직 추가 (예: 모달 열기 또는 편집 페이지로 이동)
                 }
             });
         }
 
-        // Add event listener for trash icon click
+        // "삭제 선택" 버튼 클릭에 이벤트 리스너 추가
         const deleteSelectedButton = document.getElementById('delete-selected');
         if (deleteSelectedButton) {
             deleteSelectedButton.addEventListener('click', async () => {
@@ -203,10 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error('서버에서 데이터를 가져오는 데 실패했습니다.');
             }
-            comments = await response.json(); // Update comments with fetched data
-            displayComments(currentPage); // Display fetched comments
+            comments = await response.json(); // 가져온 데이터로 댓글 업데이트
+            displayComments(currentPage); // 가져온 댓글 표시
         } catch (error) {
-            console.error('Error fetching comments:', error);
+            console.error('댓글 가져오기 오류:', error);
         }
     }
 
@@ -218,5 +228,5 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${year}-${month}-${day}`;
     }
 
-    initialize(); // Initialize page
+    initialize(); // 페이지 초기화
 });

@@ -53,4 +53,8 @@ public class PageController {
     	return "mytarotlist";
     }
     
+    @GetMapping("/adminreview")
+    public String adminReview() {
+    	return "adminreview";
+    }
 }
