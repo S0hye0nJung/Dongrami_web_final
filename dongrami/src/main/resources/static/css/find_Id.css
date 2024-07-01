@@ -1,13 +1,15 @@
-* {
+ * {
+    /* margin: 0; */
+    /* padding: 0; */
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: Arial, sans-serif;
     background-color: white;
     margin: 0;
     padding: 0;
-}
+  }
   
   .header-container {
     background-color: #7150bd;
@@ -250,97 +252,193 @@ body {
     }
   }
 
- /* 본문 */
-
-/* 로그인 폼 스타일 */
-.login-wrapper {
+.container {
+    background: white;
+    color: #9270B1;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px; /* 넓이를 500px로 조정 */
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    flex-direction: column;
-    margin-top: 50px;
 }
 
-.login-wrapper h2 {
-    font-size: 24px;
-    color: #7150bd;
+
+.container {
+    text-align: center; /* 헤더를 가운데 정렬합니다. */
+    margin-bottom: 20px; /* 하단 여백을 조정합니다. */
 }
 
-.login-wrapper form {
+.container > h2 {
+    margin-bottom: 30px;
+}
+
+#findForm {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 300px;
+    align-items: center; /* 폼을 수직 중앙 정렬합니다. */
 }
 
-.login-wrapper input[type="text"],
-.login-wrapper input[type="password"] {
+.form-group {
+    width: 100%; /* 전체 폭을 차지하도록 설정 */
+    margin-bottom: 10px; /* 아래 여백 추가 */
+}
+
+.form-group > input::placeholder{
+    color: #D2D2D2;
+}
+
+
+#name {
+    margin-top: -40px;
+}
+
+.container {
+    text-align: center;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: 320px;
+    height: 50px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: none;
+    background-color: #F8F8F8;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
-.login-wrapper .input-control {
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+    border-color: #3d85c6;
+}
+
+#id-find {
+    padding: 13px 20px;
+    background-color: #9270B1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%; /* 전체 폭을 차지하도록 설정 */
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#id-find:hover {
+    background-color: #775E9D
+}
+
+.striped {
     display: flex;
     align-items: center;
+    margin: 20px 0;
+    width: 100%; /* 전체 폭을 차지하도록 설정 */
+    text-align: center;
 }
 
-.login-wrapper .input-control label {
+.striped-line {
+    flex-grow: 1;
+    height: 1.8px;
+    background-color: #ccc;
+}
+
+.striped-text {
+    margin: 0 10px;
     font-size: 14px;
     color: #666;
 }
 
-.login-wrapper .find-links {
+.login input[type="submit"] {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #534989;
+    border: none; /* 변경 */
+    border-radius: 0; /* 변경 */
+    cursor: pointer;
+    width: 48%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login input[type="submit"]:hover {
+    color: #775E9D
+}
+
+.modal {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.login-wrapper button,
-.login-wrapper input[type="submit"],
-.login-wrapper input[type="button"] {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
-}
-
-.login-wrapper .find-links .separator {
-    color: #ccc;
-}
-
-#login {
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    background-color: #7150bd;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.modal-content {
+    background-color: whitesmoke;
+    color: #9270B1;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    height: 220px;
+    text-align: center;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.login-wrapper button[type="submit"] {
-    background: none;
-    border: none;
-    padding: 10px;
-    font: inherit;
+.close {
+    color: #9270B1;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    color: #7150bd;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
     text-decoration: none;
-    align-self: center;
-    margin-top: 10px;
 }
 
-.login-wrapper button[type="submit"]:hover {
-    text-decoration: underline;
+.modal-content p {
+    margin-bottom: 10px; /* p 요소 간격을 줄입니다. */
 }
 
-/* footer */
-  footer {
+.modal-content #loginButton {
+    margin-top: 50px; /* 버튼을 아래로 살짝 내립니다. */
+    padding: 10px 20px;
+    background-color: #9270B1;
+    color: white;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.modal-content #loginButton:hover {
+    background-color: #775E9D
+}
+
+footer {
     background-color: #7150bd;
     color: white;
     padding: 20px 0;
@@ -348,7 +446,7 @@ body {
     position: relative;
     bottom: 0;
     width: 100%;
-    top: 200px;
+    top: 1400px;
   }
   
   .footer-wrapper {
@@ -413,6 +511,57 @@ body {
       font-size: 10px; /* 폰트 크기를 더 작게 설정 */
     }
   }
+  
+
+@keyframes moveRanking1 {
+  0% { transform: translate(10px, 10px); }
+  50% { transform: translate(10px, -10px); }
+  100% { transform: translate(10px, 10px); }
+}
+
+@keyframes moveRanking2 {
+  0% { transform: translate(0px, 0px); }
+  50% { transform: translate(0px, -20px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes moveRanking3 {
+  0% { transform: translate(-20px, 0px); }
+  50% { transform: translate(-20px, -20px); }
+  100% { transform: translate(-20px, 0px); }
+}
+
+@keyframes moveRanking4 {
+  0% { transform: translate(-20px, 0px); }
+  50% { transform: translate(-20px, -20px); }
+  100% { transform: translate(-20px, 0px); }
+}
+
+@keyframes moveRanking5 {
+  0% { transform: translate(10px, 0px); }
+  50% { transform: translate(10px, -20px); }
+  100% { transform: translate(10px, 0px); }
+}
+
+.ranking1 { 
+  animation: moveRanking1 5s infinite ease-in-out; 
+}
+
+.ranking2 { 
+  animation: moveRanking2 5s infinite ease-in-out; 
+}
+
+.ranking3 { 
+  animation: moveRanking3 5s infinite ease-in-out; 
+}
+
+.ranking4 { 
+  animation: moveRanking4 5s infinite ease-in-out; 
+}
+
+.ranking5 { 
+  animation: moveRanking5 5s infinite ease-in-out; 
+}
 
 /* 로그인 시 네비바 바뀌는 부분 스타일 */
 #userDropdownContainer {
