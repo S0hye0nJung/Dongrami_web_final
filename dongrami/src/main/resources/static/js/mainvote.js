@@ -4,8 +4,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     const voteId = id;
-	
-	
+    document.getElementById('voteId').value = voteId;
+
+    // 페이지 로딩 시 투표 정보 가져오기
+    fetchVoteById(voteId);
+
     function fetchVoteById(id) {
         fetch(`/api/votes/${id}`)
             .then(response => {
@@ -17,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(vote => {
                 const voteDiv = createVoteElement(vote);
                 voteListDiv.appendChild(voteDiv);
+                fetchComments(voteId);
             })
             .catch(error => {
                 console.error('Error fetching vote:', error);
@@ -33,10 +37,9 @@ document.addEventListener("DOMContentLoaded", function() {
             <p>${vote.option1}</p>
             <p>${vote.option2}</p>
         `;
-        
         const buttonContainer = document.createElement('div');
         buttonContainer.classList.add('button-container');
-        
+
         const button1 = document.createElement('button');
         button1.textContent = '투표';
         button1.addEventListener('click', function() {
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
             button1.classList.add('selected');
             button2.classList.remove('selected');
         });
-        
+
         const button2 = document.createElement('button');
         button2.textContent = '투표';
         button2.addEventListener('click', function() {
@@ -52,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
             button2.classList.add('selected');
             button1.classList.remove('selected');
         });
-        
+
         buttonContainer.appendChild(button1);
         buttonContainer.appendChild(button2);
         voteDiv.appendChild(buttonContainer);
@@ -76,7 +79,18 @@ document.addEventListener("DOMContentLoaded", function() {
             <span class="percentage" id="percentage2_${vote.voteId}"></span>
         `;
         voteDiv.appendChild(barContainer2);
-        
+
+        const replyContainer = document.createElement('div');
+        replyContainer.classList.add('reply-container');
+        const replyButton = document.createElement('button');
+        replyButton.id = 'replyButton';
+        replyButton.textContent = '반응 보기';
+        replyButton.addEventListener('click', function() {
+            window.location.href = `/mainvote?id=${vote.voteId}`;
+        });
+        replyContainer.appendChild(replyButton);
+        voteDiv.appendChild(replyContainer);
+
         return voteDiv;
     }
 
@@ -129,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(comments => {
+                commentDiv.innerHTML = '';
                 comments.forEach(comment => {
                     const commentElem = createCommentElement(comment);
                     commentDiv.appendChild(commentElem);
@@ -144,53 +159,120 @@ document.addEventListener("DOMContentLoaded", function() {
         commentDiv.classList.add('comment-item');
 
         commentDiv.innerHTML = `
-            <h4>${comment.member.userId}</h4>
+            <h4>${comment.member.nickname}</h4>
             <p>${comment.content}</p>
             <p>작성일: ${comment.replyCreate}</p>
-            <h5></h5>
+            <button class="menu-button">...</button>
+            <button class="edit-button" style="display:none;">수정</button>
+    		<button class="delete-button" style="display:none;">삭제</button>
+            <div class="edit-form" style="display:none;">
+                <textarea class="edit-content">${comment.content}</textarea>
+                <button class="save-edit-button">저장</button>
+                <button class="cancel-edit-button">취소</button>
+            </div>
         `;
+		const menuButton = commentDiv.querySelector('.menu-button');
+        const editButton = commentDiv.querySelector('.edit-button');
+        const deleteButton = commentDiv.querySelector('.delete-button');
+        const editForm = commentDiv.querySelector('.edit-form');
+        const saveEditButton = editForm.querySelector('.save-edit-button');
+        const cancelEditButton = editForm.querySelector('.cancel-edit-button');
+        const editContent = editForm.querySelector('.edit-content');
+		menuButton.addEventListener('click', function(){
+   			 editButton.style.display = 'block';
+    		deleteButton.style.display = 'block';
+    	});
+        editButton.addEventListener('click', function() {
+            editForm.style.display = 'block';
+        });
+
+        cancelEditButton.addEventListener('click', function() {
+            editForm.style.display = 'none';
+        });
+
+        saveEditButton.addEventListener('click', function() {
+            const updatedContent = editContent.value;
+            updateComment(comment.replyId, updatedContent, commentDiv);
+        });
+
+        deleteButton.addEventListener('click', function() {
+            deleteComment(comment.replyId, commentDiv);
+        });
 
         return commentDiv;
     }
-    
-        function submitComment(voteId) {
-            const content = document.getElementById('content').value;
 
-            const comment = {
-                content: content
-            };
-
-            fetch('/api/comment/{voteId}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(comment),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('댓글이 성공적으로 등록되었습니다:', data);
-
-                // 댓글을 목록에 추가하는 코드를 작성할 수 있음
-                // 예: addCommentToList(data);
-
-                // 댓글 등록 후 폼 초기화
-                document.getElementById('content').value = '';
-            })
-            .catch(error => {
-                console.error('댓글 등록 중 오류 발생:', error);
-            });
-        }
-
-
-	 document.getElementById('submit').addEventListener('click', function() {
-            // 댓글 생성 함수 호출
-            submitComment();
+    function updateComment(replyId, updatedContent, commentElem) {
+        fetch(`/api/replies/${replyId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: updatedContent }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update comment');
+            }
+            return response.json();
+        })
+        .then(updatedComment => {
+            commentElem.querySelector('p').textContent = updatedComment.content;
+            commentElem.querySelector('.edit-form').style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error updating comment:', error);
         });
+    }
 
-    // 초기 로드 시 fetchVoteById 호출
-    fetchVoteById(id);
-    fetchComments(voteId);
+    function deleteComment(replyId, commentElem) {
+        fetch(`/api/replies/${replyId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete comment');
+            }
+            commentElem.remove();
+        })
+        .catch(error => {
+            console.error('Error deleting comment:', error);
+        });
+    }
 
+    document.getElementById('replyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const content = document.getElementById('content').value;
+        const level = document.getElementById('level').value;
+        const userId = document.getElementById('userId').value;
+        const userNickname = document.getElementById('userNicknameInput').value;
+
+        const replyData = {
+            content: content,
+            level: level,
+            member: userId,
+            parentReId: null,
+            replyCreate: new Date().toISOString(),
+            replyModify: new Date().toISOString(),
+            voteId: voteId,
+        };
+
+        fetch(`/api/replies/${voteId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(replyData)
+        })
+        .then(response => response.json())
+        .then(data => {
+			document.getElementById('content').value = '';  // 댓글 작성 후 content 필드 초기화
+            fetchComments(voteId);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     });
 
+});

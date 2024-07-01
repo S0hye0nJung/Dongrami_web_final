@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let currentPage = 0;
     const pageSize = 3;
+    
     function fetchVotes(page) {
         fetch(`/api/votes/paged-votes?page=${page}&size=${pageSize}`)
             .then(response => response.json())
