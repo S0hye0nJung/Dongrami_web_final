@@ -8,139 +8,134 @@
     <link rel="stylesheet" href="./css/result.css" />
 </head>
 <body>
-	<header>
-	     <div class="header-container">
-	       <div class="logo-container">
-	         <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
-	         <div class="hover-content">
-	           <span class="hover-text left-text">동그</span>
-	           <div class="logo-image"></div>
-	           <span class="hover-text right-text">라미</span>
-	         </div>
-	       </div>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
+                <div class="hover-content">
+                    <span class="hover-text left-text">동그</span>
+                    <div class="logo-image"></div>
+                    <span class="hover-text right-text">라미</span>
+                </div>
+            </div>
 
-		   <div id="right-section">
-		   	      <!-- 로그인하지 않은 경우 -->
-		   	      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
-		   	               
-		   	       <!-- 로그인한 경우 -->
-		   	       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
-		   	            <a href="#" id="userName" class="dropdown-toggle">
-		   	                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
-		   	                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
-		   	            </a>
-		   	            <div id="userDropdown" class="dropdown-menu">
-		   	                 <a th:href="@{/mypage}">마이페이지</a>
-		   	                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
-		   	            </div>
-		   	        </div>
-		   	   </div>
-	     </div>
-	   </header>
-
-	   <section id="nav-section">
-	     <div id="center-section">
-	       <nav id="nav">
-	         <ul>
-	           <li>
-	             <a th:href="@{/}">HOME</a>
-	           </li>
-	           <li><a th:href="@{/topic}">타로 보러가기</a></li>
-	           <li>
-	             <a th:href="@{/vote}">투표</a>
-	           </li>
-	           <li><a th:href="@{/review}">후기</a></li>
-	         </ul>
-	       </nav>
-	     </div>
-	   </section>
-	   
-	   <div class="content">
-	           <div class="img">
-	               <img src="./images/basic.png" alt="" id="cha">
-	           </div>
-	           <div class="cards">
-	               <div class="card" data-position="과거">
-	                   <img th:src="${reading.imageUrl1}" id="card1" />
-	               </div>
-	               <div class="card" data-position="현재">
-	                   <img th:src="${reading.imageUrl2}" id="card2" />
-	               </div>
-	               <div class="card" data-position="미래">
-	                   <img th:src="${reading.imageUrl3}" id="card3" />
-	               </div>
-	           </div>
-	           <div class="interpretation">
-	               <div style="white-space: pre-line;">
-	                   <span class="title" th:text="${reading.reading1Title}"></span>
-	                   <div class="icontent" id="past-content" th:text="${reading.reading1}"></div>
-	               </div>
-	               <div style="white-space: pre-line;">
-	                   <span class="title" th:text="${reading.reading2Title}"></span>
-	                   <div class="icontent" id="present-content" th:text="${reading.reading2}"></div>
-	               </div>
-	               <div style="white-space: pre-line;">
-	                   <span class="title" th:text="${reading.reading3Title}"></span>
-	                   <div class="icontent" id="future-content" th:text="${reading.reading3}"></div>
-	               </div>
-	           </div>
-	       </div>
-            <div class="buttons">
-                <a href="javascript:void(0);" id="share">공유</a>
-                <a href="javascript:void(0);" id="save">저장</a>
-                <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
+            <div id="right-section">
+                <a th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+                <div id="userDropdownContainer" style="display: none">
+                    <a href="#" id="userName" class="dropdown-toggle"></a>
+                    <div id="userDropdown" class="dropdown-menu">
+                        <a th:href="@{/mypage}">마이페이지</a>
+                        <a href="#" id="logoutButton">로그아웃</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </header>
 
-        <!-- Review Modal -->
-        <div id="review-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>여행</h2>
-                <p>당신의 운명을 확인하셨죠? 그 경험을 나누어주세요!</p>
-                <form id="reviewForm" method="post" action="/submitReview">
-                    <div class="review-details">
-                        <div class="review-user">
-                            <img src="images/user-avatar.png" alt="User Avatar" class="user-avatar">
-                            <div class="user-info">
-                                <span class="user-name">닉네임</span>
-                                <span class="user-role">직책</span>
-                            </div>
-                        </div>
-                        <div class="review-rating">
-                            <label for="rating">평점 <span class="rating-score">0점</span></label>
-                            <div id="rating">
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                            </div>
+    <section id="nav-section">
+        <div id="center-section">
+            <nav id="nav">
+                <ul>
+                    <li>
+                        <a th:href="@{/}">HOME</a>
+                    </li>
+                    <li><a th:href="@{/topic}">타로 보러가기</a></li>
+                    <li>
+                        <a th:href="@{/vote}">투표</a>
+                    </li>
+                    <li><a th:href="@{/review}">후기</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <div class="content">
+        <div class="img">
+            <img src="./images/basic.png" alt="" id="cha">
+        </div>
+        <div class="cards">
+            <div class="card" data-position="과거">
+                <img th:src="${reading.imageUrl1}" id="card1" />
+            </div>
+            <div class="card" data-position="현재">
+                <img th:src="${reading.imageUrl2}" id="card2" />
+            </div>
+            <div class="card" data-position="미래">
+                <img th:src="${reading.imageUrl3}" id="card3" />
+            </div>
+        </div>
+        <div class="interpretation">
+            <div style="white-space: pre-line;">
+                <span class="title" th:text="${reading.reading1Title}"></span>
+                <div class="icontent" id="past-content" th:text="${reading.reading1}"></div>
+            </div>
+            <div style="white-space: pre-line;">
+                <span class="title" th:text="${reading.reading2Title}"></span>
+                <div class="icontent" id="present-content" th:text="${reading.reading2}"></div>
+            </div>
+            <div style="white-space: pre-line;">
+                <span class="title" th:text="${reading.reading3Title}"></span>
+                <div class="icontent" id="future-content" th:text="${reading.reading3}"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <a th:href="@{/topic}" id="more-tarot">타로 더보기</a>
+            <a href="javascript:void(0);" id="save">저장</a>
+            <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>여행</h2>
+            <p>당신의 운명을 확인하셨죠? 그 경험을 나누어주세요!</p>
+            <form id="reviewForm" method="post" action="/submitReview">
+                <div class="review-details">
+                    <div class="review-user">
+                        <img src="images/user-avatar.png" alt="User Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <span class="user-name">닉네임</span>
+                            <span class="user-role"># 소주제</span>
                         </div>
                     </div>
-                    <textarea id="review-text" name="reviewText" placeholder="100자 미만 작성해주세요"></textarea>
-                    <div id="character-count">0/100</div>
-                    <input type="hidden" id="ratingScore" name="ratingScore" value="5">
-                    <button type="submit" id="submit-review">리뷰 작성 완료</button>
-                </form>
+                    <div class="review-rating">
+                        <label for="rating">평점 <span class="rating-score">0점</span></label>
+                        <div id="rating">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                </div>
+                <textarea id="review-text" name="reviewText" placeholder="100자 미만 작성해주세요"></textarea>
+                <div id="character-count">0/100</div>
+                <input type="hidden" id="ratingScore" name="ratingScore" value="5">
+                <button type="submit" id="submit-review">리뷰 작성 완료</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-company">
+                <label class="footer-label">CIRCLE TAROT</label>
+                <div class="description">
+                    <div class="footer-companyinfo">
+                        <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+                    </div>
+                    <div class="copyright">
+                        <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+                    </div>
+                </div>
             </div>
         </div>
-		<footer>
-			       <div class="footer-wrapper">
-						<div class="footer-company">
-						    <label class="footer-label">CIRCLE TAROT</label>
-						        <div class="description">
-						            <div class="footer-companyinfo">
-						                <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
-						            </div>
-						            <div class="copyright">
-						                <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
-						            </div>
-						        </div>
-						</div>		
-				</footer>
-        <!-- Scripts -->
-        <script src="./js/result.js"></script>
-    </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/result.js"></script>
 </body>
 </html>

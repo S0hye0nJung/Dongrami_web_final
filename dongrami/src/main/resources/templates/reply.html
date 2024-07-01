@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 댓글 페이지</title>
+    <link rel="stylesheet" href="/css/reply.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo-container">
+            <a href="/" class="logo-text">CIRCLE TAROT</a>
+            <div class="hover-content">
+                <span class="hover-text left-text">동그</span>
+                <div class="logo-image"></div>
+                <span class="hover-text right-text">라미</span>
+            </div>
+        </div>
+        <div id="right-section">
+            <a href="/login" id="loginButton">로그인 / 회원가입</a>
+            <div id="userDropdownContainer" style="display: none">
+                <a href="#" id="userName" class="dropdown-toggle"></a>
+                <div id="userDropdown" class="dropdown-menu">
+                    <a href="/mypage">마이페이지</a>
+                    <a href="#" id="logoutButton">로그아웃</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="nav-section">
+    <div id="center-section">
+        <nav id="nav">
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/topic">타로 보러가기</a></li>
+                <li><a href="/vote">투표</a></li>
+                <li><a href="/review">후기</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+<div class="container">
+    <h2>내가 쓴 댓글</h2>
+    <div id="reply-controls" class="reply-controls">
+        <button id="delete-selected" class="delete-button">
+            <img src="/images/trash-icon.png" alt="trash icon" class="trash-icon">
+        </button>
+        <span id="selected-count">0/10 선택</span>
+    </div>
+    <div id="reply-section">
+        <table class="reply-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all"></th>
+                    <th>번호</th>
+                    <th>투표주제</th>
+                    <th>댓글내용</th>
+                    <th>작성날짜</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reply, iterStat : ${replies}">
+                    <td><input type="checkbox" class="select-reply"></td>
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${reply.question}"></td>
+                    <td><a th:href="@{/vote/{voteId}(voteId=${reply.voteId})}" th:text="${reply.content}"></a></td>
+                    <td th:text="${reply.replyCreate}"></td>
+                    <td><button class="edit-button" th:attr="data-id=${reply.replyId}, data-content=${reply.content}, data-question=${reply.question}">수정</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="pagination" class="pagination"></div>
+</div>
+<footer>
+    <div class="footer-wrapper">
+        <div class="footer-company">
+            <label class="footer-label">CIRCLE TAROT</label>
+            <div class="description">
+                <div class="footer-companyinfo">
+                    <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+                </div>
+                <div class="copyright">
+                    <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 댓글 수정 모달 -->
+<div id="reply-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>댓글 수정</h2>
+            <span class="close">&times;</span>
+        </div>
+        <p id="modal-topic">댓글을 수정하세요:</p>
+        <form id="replyForm" method="post" action="/api/reply/update">
+            <textarea id="reply-text" name="replyText" placeholder="100자 미만 작성해주세요"></textarea>
+            <div id="character-count">0/100</div>
+            <input type="hidden" id="replyId" name="replyId" value="">
+            <div class="modal-buttons">
+                <button type="submit" id="save-reply">수정</button>
+                <button type="button" id="cancel-reply">취소</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/reply.js"></script>
+</body>
+</html>
