@@ -22,9 +22,4 @@ public class MyTarotListController {
         return myTarotListService.getAllMyTarotList();
     }
     
-    // 댓글 삭제 엔드포인트
-    @DeleteMapping("/delete-comment/{id}")
-    public void deleteComment(@PathVariable("id") Integer commentId) {
-        myTarotListService.deleteComment(commentId);
-    }
 }

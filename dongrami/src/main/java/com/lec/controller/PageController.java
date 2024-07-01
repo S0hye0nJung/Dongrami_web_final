@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
-    @GetMapping("/comments")
+    @GetMapping("/reply")
     public String commentsPage() {
-        return "comments";
+        return "myreply";
     }
     
     @GetMapping("/result")
@@ -17,7 +17,7 @@ public class PageController {
     
     @GetMapping("/review")
     public String reviewPage() {
-        return "review";
+        return "allreview";
     }
     
     @GetMapping("/mypage")
