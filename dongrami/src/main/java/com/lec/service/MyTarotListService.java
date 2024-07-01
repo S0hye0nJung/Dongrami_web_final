@@ -31,7 +31,10 @@ public class MyTarotListService {
         }).collect(Collectors.toList());
     }
     
-    public void deleteComment(Integer commentId) {
-        myTarotListRepository.deleteById(commentId);
+
+    public void deleteSavedResults(List<Integer> resultIds) {
+        for (Integer resultId : resultIds) {
+            myTarotListRepository.deleteById(resultId);
+        }
     }
 }
