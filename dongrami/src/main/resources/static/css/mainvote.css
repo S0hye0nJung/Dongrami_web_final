@@ -20,22 +20,22 @@ h1 {
 }
 
 .vote-item {
-	margin-top: 10px;
-    margin-left: 400px;
+    margin-top: 10px;
+    margin-left: 600px;
     width: 1100px;
     height: 500px;
     background-color: honeydew;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 20px
 }
 
 .vote-item h2 {
-	position: absolute;
-    left: 460px;
+    position: absolute;
+    left: 632px;
     text-align: center;
-    font-size: 20px;
+    font-size: 20px
 }
 
 .vote-item img {
@@ -167,11 +167,12 @@ h1 {
     height: 75px; /* 버튼 높이 */
 }
   #pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 101px;
-   			 margin-left: 463px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 101px;
+    left: 1096px;
 			}
 
         #pagination button {
@@ -217,15 +218,15 @@ h1 {
     resize: none;
 }
 #comment-section{
-	position:absolute;
-	top:1350px;
-	left:400px;
-	width:1100px;
+    position: absolute;
+    top: 1400px;
+    left: 600px;
+    width: 1100px;
 }
 #submitComment{
 	position:absolute;
-    top: 1282px;
-    left: 1400px;
+    top: 1350px;
+    left: 1600px;
 	padding: 0;
     background-color: #28a745;
     border: none;
@@ -237,12 +238,14 @@ h1 {
 }
 h3{
 	position:absolute;
-	top:1150px;
-	left:400px;
+	font-size: 32px;
+	top:1100px;
+	left: 600px;
 }
 h5{
 	border-bottom: 1px solid #ccc;
 }
+
 
 /* 로그인 시 네비바 바뀌는 부분 스타일 */
 #userDropdownContainer {
@@ -291,4 +294,63 @@ h5{
 
 #userDropdown a:hover {
   background-color: #f1f1f1;
+
+#content{
+	width: 1100px;
+    height: 70px;
+    border: 1px solid #ddd;
+    outline: none;
+    position: absolute;
+    left: 600px;
+    top: 1260px;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    resize: none;
+}
+#name1{
+	position:absolute;
+	top:1230px;
+	left: 600px;
+	font-size:20px;
+	
+}
+.comment-item{
+	border-bottom: 1px solid #ccc;
+}
+.edit-button{
+	color: #ffc107;
+    border: none;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    left: 990px;
+    top: -104px;
+}
+.delete-button{
+	position: relative;
+    left: 1040px;
+    top: -133px;
+	color: #dc3545;
+    border: none;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.menu-button{
+    display: block;
+    position: relative;
+    background-color: #fff;
+    color: black;
+    font-size: 20px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+	left: 1050px;
+    top: -113px;
+
 }

@@ -36,7 +36,9 @@
 				       <!-- 로그인한 경우 -->
 				       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
 				            <a href="#" id="userName" class="dropdown-toggle">
+
 				                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
+				                <img src="/images/basic.png" alt="프로필 이미지" class="profile-img">>>>>>>> main
 				                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
 				            </a>
 				            <div id="userDropdown" class="dropdown-menu">
@@ -45,7 +47,9 @@
 				            </div>
 				        </div>
 				   </div>
+
 		  </div>
+
 		</header>
 		
 

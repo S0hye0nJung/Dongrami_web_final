@@ -36,9 +36,11 @@ package com.lec.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.lec.dto.ReplyDTO;
 import com.lec.entity.Reply;
 import com.lec.entity.Vote;
 import com.lec.service.ReplyService;
@@ -66,27 +68,28 @@ public class ReplyController {
         return replyService.getRepliesByVoteId(voteId);
     }
 
-    @PostMapping("/comment/{voteId}")
-    public ResponseEntity<Reply> createReply(@PathVariable("voteId") int voteId, @RequestBody Reply reply) {
-        // voteId를 댓글에 설정
-        reply.setVote(new Vote());
-        reply.getVote().setVoteId(voteId);
+    @PostMapping("/{voteId}")
+    public ResponseEntity<Reply> addReplyToVote(
+            @PathVariable("voteId") int voteId,
+            @RequestBody Reply newReply) {
 
-        // 댓글 서비스를 통해 저장하고 생성된 댓글을 반환
-        Reply createdReply = replyService.createReply(reply);
-        return ResponseEntity.ok(createdReply);
+        // 특정 투표에 댓글 추가하기
+        Reply savedReply = replyService.addReplyToVote(voteId, newReply);
+
+        // 새로 작성된 댓글과 함께 201 Created 응답 반환
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedReply);
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Reply> updateReply(@PathVariable int id, @RequestBody Reply replyDetails) {
-        Reply updatedReply = replyService.updateReply(id, replyDetails);
+    @PutMapping("/{replyId}")
+    public ResponseEntity<Reply> updateReply(@PathVariable("replyId") int replyId, @RequestBody Reply replyDetails) {
+        Reply updatedReply = replyService.updateReply(replyId, replyDetails);
         return updatedReply != null ? ResponseEntity.ok(updatedReply) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReply(@PathVariable int id) {
-        replyService.deleteReply(id);
+    @DeleteMapping("/{replyId}")
+    public ResponseEntity<Void> deleteReply(@PathVariable("replyId") int replyId) {
+        replyService.deleteReply(replyId);
         return ResponseEntity.noContent().build();
     }
 }
