@@ -14,6 +14,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.ConstraintMode;
 
 
 @Setter
@@ -49,7 +51,10 @@ public class Review {
     private Subcategory subcategory;
     
     @ManyToOne
-    @JoinColumn(name = "result_id", referencedColumnName = "result_id", nullable = true)
+    @JoinColumn(name = "fk_result_id", 
+                referencedColumnName = "result_id", 
+                nullable = true, 
+                foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private SavedResult savedResult;
 
     @Builder
