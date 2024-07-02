@@ -12,7 +12,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
 }
 
 h1 {
@@ -20,100 +20,104 @@ h1 {
 }
 
 .vote-item {
-    margin-top: 10px;
-    margin-left: 600px;
+    margin-top: 145px;
+    margin-left: 380px;
     width: 1100px;
     height: 500px;
-    background-color: honeydew;
-    border: 1px solid #ccc;
-    border-radius: 10px;
     padding: 10px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .vote-item h2 {
+    top: 746px;
     position: absolute;
-    left: 632px;
-    text-align: center;
-    font-size: 20px
+    left: 881px;
+    font-size: 20px;
 }
 
 .vote-item img {
-    max-width: 35%;
+    max-width: 1000px;
     height: auto;
     display: block;
     margin-top: 63px;
-    margin-left: 50px;
+    margin-left: -271px;
 }
 
 .vote-item p {
     position: relative;
-    top: -360px;
-    margin-left: 500px;
-    margin-bottom: 100px;
+    top: -516px;
+    margin-bottom: -50px;
+    margin-left: 418px;
+    padding: 83px;
 }
 
  .button-container {
   	display: flex;
     flex-direction: column;
-    gap: 90px;
+    gap: 100px;
     position: relative;
     top: -580px;
         
     }
 
-.button-container button {
-		margin-left: 950px;
-		margin-top: 10px;
-        width: 80px;
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: #ffffff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+.button1 {
+    margin: 10px;
+    position: relative;
+    left: 835px;
+    top: -36px;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     }
 .button-container .selected{
 		background-color: orange;
 	}
-.bar-container1 {
-    display: flex;
-    width: 400px;
+.button2{
+	 margin: 10px;
+    position: relative;
+    left: 835px;
+    top: -15px;
+    width: 80px;
     height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.bar-container1 {
+	display: flex;
+    width: 770px;
+    height: 40px;
     cursor: pointer;
     position: relative;
     border-radius: 5px;
-    top: -500px;
+    top: -625px;
     left: 650px;
-    background-color:#FF69B4;
-    margin-top:-240px;
+    background-color: #FF69B4;
+    margin-top: -240px;
     margin-left: -150px;
 }
 .bar-container2{
-	display: flex;
-    width: 400px;
-    height: 30px;
+    display: flex;
+    width: 770px;
+    height: 40px;
     cursor: pointer;
     position: relative;
     border-radius: 5px;
-    top: -500px;
+    top: -601px;
     background-color: skyblue;
     margin-top: 100px;
-    margin-left: 501px;	
+    margin-left: 501px;
 }
-
-/*#barContainer1{
-    background-color:#FF69B4;
-    margin-top:-240px;
-    margin-left: -150px;
-}
-#barContainer2{
-    background-color: skyblue;
-    margin-top: 100px;
-    margin-left: -150px;
-}*/
 .bar1 {
     position: relative;
     height: 100%;
@@ -133,71 +137,67 @@ h1 {
 }
 
 #text1 {
-    color:white;
-    position:absolute;
-    top:20%;
-    left:5%;
+    color: white;
+    position: absolute;
+    top: 27%;
+    left: 5%;
 }
 #text2{
-    position:absolute;
-    color:white;
-    top:20%;
-    left:5%;
+    color: white;
+    position: absolute;
+    top: 27%;
+    left: 5%;
 }
 .percentage{
-    position: absolute;
+	position: absolute;
     color: white;
-    left: 360px;
-    top: 6px;
+    left: 700px;
+    top: 10px;
 }
-#replyButton{
-    position: relative;
-	top: -425px;
-    left: 680px;
-    margin-left: 10px;
-    background-color: plum; /* 버튼 배경색 */
-    border: none; /* 테두리 없애기 */
-    color: white; /* 텍스트 색상 */
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px; /* 버튼 모서리 둥글게 */
-    width: 150px; /* 버튼 너비 */
-    height: 75px; /* 버튼 높이 */
-}
-  #pagination {
+ #pagination {
+	padding: 10px;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 101px;
-    left: 1096px;
-			}
-
-        #pagination button {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+    background-color:white;
+    left: 880px;
+    top:2639px;
+}
+#pagination button{
+	background-color:white;
+	border: none;
+	margin:10px;
+}
+#pagination button:hover{
+		box-shadow: 0 0 0 1px gray; /* 회색 테두리 효과 */
+}
+    #prevButton {
+    position: relative;
+    width: 50px;
+    height: 30px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    left: -20px;
+    text-align: center;
+    padding: 4.5px 3px;
+    background-color:white;
         }
-
-        #pagination button:hover {
-            background-color: #0056b3;
-        }
-
-        #pagination button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
+     #nextButton{
+    position: relative;
+    width: 50px;
+    height: 30px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    left: 11px;
+    text-align: center;
+    padding: 4.5px 3px;
+    background-color:white;
+	 }  
 
         #pagination span {
             font-size: 18px;
@@ -219,90 +219,37 @@ h1 {
 }
 #comment-section{
     position: absolute;
-    top: 1400px;
-    left: 600px;
-    width: 1100px;
+    top: 1685px;
+    left: 345px;
+    width: 1200px;
 }
 #submitComment{
-	position:absolute;
-    top: 1350px;
-    left: 1600px;
-	padding: 0;
+    position: absolute;
+    top: 1650px;
+    left: 1446px;
     background-color: #28a745;
     border: none;
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    width:100px;
-    height:50px;
+    width: 100px;
+    height: 50px;
 }
 h3{
-	position:absolute;
-	font-size: 32px;
-	top:1100px;
-	left: 600px;
+    position: absolute;
+    font-size: 32px;
+    top: 1411px;
+    left: 352px;
 }
-h5{
-	border-bottom: 1px solid #ccc;
-}
-
-
-/* 로그인 시 네비바 바뀌는 부분 스타일 */
-#userDropdownContainer {
-  position: relative;
-}
-
-#userName {
-  color: white;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-
-.profile-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-#userDropdown {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 180px;  /* 넓이를 180px로 증가 */
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  right: 0;
-  top: 100%;
-  border-radius: 4px;
-  padding: 10px 0;  /* 상하 패딩 추가 */
-}
-
-#userDropdownContainer:hover #userDropdown {
-  display: block;
-}
-
-#userDropdown a {
-  color: #333;
-  padding: 12px 20px;  /* 좌우 패딩 증가 */
-  text-decoration: none;
-  display: block;
-  text-align: left;  /* 텍스트 왼쪽 정렬 */
-  font-size: 14px;  /* 글자 크기 조정 */
-}
-
-#userDropdown a:hover {
-  background-color: #f1f1f1;
 
 #content{
-	width: 1100px;
+    width: 1200px;
     height: 70px;
     border: 1px solid #ddd;
     outline: none;
     position: absolute;
-    left: 600px;
-    top: 1260px;
+    left: 350px;
+    top: 1555px;
     resize: none;
     font-family: inherit;
     font-size: inherit;
@@ -310,31 +257,40 @@ h5{
     resize: none;
 }
 #name1{
-	position:absolute;
-	top:1230px;
-	left: 600px;
-	font-size:20px;
+    position: absolute;
+    top: 1518px;
+    left: 352px;
+    font-size: 20px
 	
 }
 .comment-item{
+	height:160px;
 	border-bottom: 1px solid #ccc;
 }
+.comment-item h5{
+	position:relative;
+	top:-53px;
+}
+.comment-item p{
+	position:relative;
+	top:16px;
+}
 .edit-button{
-	color: #ffc107;
+    color: #ffc107;
     border: none;
     background-color: transparent;
     padding: 5px 10px;
     font-size: 14px;
     cursor: pointer;
     position: relative;
-    left: 990px;
+    left: 1079px;
     top: -104px;
 }
 .delete-button{
-	position: relative;
-    left: 1040px;
-    top: -133px;
-	color: #dc3545;
+    position: relative;
+    left: 1121px;
+    top: -132px;
+    color: #dc3545;
     border: none;
     background-color: transparent;
     padding: 5px 10px;
@@ -342,7 +298,7 @@ h5{
     cursor: pointer;
 }
 .menu-button{
-    display: block;
+	display: block;
     position: relative;
     background-color: #fff;
     color: black;
@@ -350,7 +306,33 @@ h5{
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-	left: 1050px;
+    left: 1126px;
     top: -113px;
-
+}
+.edit-content{
+    position: relative;
+    top: -174px;
+    width: 1065px;
+    height: 50px;
+    resize: none;
+    border: 1px solid #ddd;
+	
+}
+.edit-form{
+	position:relative;
+}
+.edit-form button{
+    height: 30px;
+    position: relative;
+    top: -150px;
+    left: -122px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 50px;
+    margin-right: 13px;
+}
+ .current-page{
+		color: blue;
 }

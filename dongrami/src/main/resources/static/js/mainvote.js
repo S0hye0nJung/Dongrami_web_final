@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     const voteId = id;
+    let previousOption = null;
     document.getElementById('voteId').value = voteId;
+    
+    let currentPage;  // 현재 페이지를 나타내는 변수 추가
+	const pageSize = 5;  // 페이지 당 댓글 수 설정 (예시로 10개씩)
 
     // 페이지 로딩 시 투표 정보 가져오기
     fetchVoteById(voteId);
@@ -41,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         buttonContainer.classList.add('button-container');
 
         const button1 = document.createElement('button');
+        button1.classList.add('button1');
         button1.textContent = '투표';
         button1.addEventListener('click', function() {
             voteOption(vote.voteId, 'option1');
@@ -49,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         const button2 = document.createElement('button');
+        button2.classList.add('button2');
         button2.textContent = '투표';
         button2.addEventListener('click', function() {
             voteOption(vote.voteId, 'option2');
@@ -80,42 +86,32 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
         voteDiv.appendChild(barContainer2);
 
-        const replyContainer = document.createElement('div');
-        replyContainer.classList.add('reply-container');
-        const replyButton = document.createElement('button');
-        replyButton.id = 'replyButton';
-        replyButton.textContent = '반응 보기';
-        replyButton.addEventListener('click', function() {
-            window.location.href = `/mainvote?id=${vote.voteId}`;
-        });
-        replyContainer.appendChild(replyButton);
-        voteDiv.appendChild(replyContainer);
-
         return voteDiv;
     }
 
-    window.voteOption = function(voteId, option) {
-        fetch(`/api/votes/${voteId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ option: option }),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to vote');
-            }
-            return response.json();
-        })
-        .then(updatedVote => {
-            console.log('Vote successful:', updatedVote);
-            updateVoteResults(updatedVote);
-        })
-        .catch(error => {
-            console.error('Error voting:', error);
-        });
-    };
+     window.voteOption = function(voteId, option) {
+    fetch(`/api/votes/${voteId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ option: option, previousOption: previousOption }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to vote');
+        }
+        return response.json();
+    })
+    .then(updatedVote => {
+        console.log('Vote successful:', updatedVote);
+        updateVoteResults(updatedVote);
+        previousOption = option; // 현재 선택을 이전 선택으로 저장
+    })
+    .catch(error => {
+        console.error('Error voting:', error);
+    	});
+	};
 
     function updateVoteResults(vote) {
         const totalVotes = vote.option1Count + vote.option2Count;
@@ -133,26 +129,83 @@ document.addEventListener("DOMContentLoaded", function() {
         bar1.style.width = `${percentage1}%`;
         bar2.style.width = `${percentage2}%`;
     }
-
-    function fetchComments(voteId) {
-        fetch(`/api/replies/vote/${voteId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch comments');
-                }
-                return response.json();
-            })
-            .then(comments => {
-                commentDiv.innerHTML = '';
-                comments.forEach(comment => {
-                    const commentElem = createCommentElement(comment);
-                    commentDiv.appendChild(commentElem);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching comments:', error);
+	//댓글 조회
+function fetchComments(voteId, page = 0, size = 5) {
+    fetch(`/api/replies/${voteId}/replies?page=${page}&size=${size}&sort=replyCreate,desc`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const comments = data.content; // Page 객체의 content 속성에 실제 댓글들이 있습니다.
+            const commentDiv = document.getElementById('comment-section'); // `commentDiv`가 정의된 곳에 맞게 수정
+            commentDiv.innerHTML = '';
+            comments.forEach(comment => {
+                const commentElem = createCommentElement(comment);
+                commentDiv.appendChild(commentElem);
             });
+
+            // 페이지 네이션 UI 업데이트
+            updatePagination(data, voteId, size);
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error);
+        });
+}
+
+function updatePagination(data, voteId, size) {
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = '';
+
+    // 이전 페이지 버튼
+    const prevButton = document.createElement('button');
+    prevButton.textContent = '< 이전';
+    prevButton.onclick = () => fetchComments(voteId, data.number - 1, size);
+    prevButton.setAttribute('id', 'prevButton'); // id 부여
+    paginationDiv.appendChild(prevButton);
+
+    // 페이지 번호 버튼
+    let startPage = Math.max(0, data.number - 1); // 시작 페이지 번호 계산
+    let endPage = startPage + 2; // 보여줄 페이지 버튼의 끝 번호 계산
+    if (endPage > data.totalPages - 1) {
+        endPage = data.totalPages - 1;
     }
+    startPage = Math.max(0, endPage - 2); // 시작 페이지 번호 다시 계산
+
+    for (let i = startPage; i <= endPage; i++) {
+        const pageNumberButton = document.createElement('button');
+        pageNumberButton.textContent = i + 1;
+        pageNumberButton.addEventListener('click', function() {
+            fetchComments(voteId, i, size); // 페이지 번호를 인자로 하여 fetchComments 호출
+        });
+
+        if (i === data.number) {
+            pageNumberButton.classList.add('current-page'); // 현재 페이지에 해당하는 버튼에 클래스 추가
+        }
+
+        paginationDiv.appendChild(pageNumberButton);
+    }
+
+    // 다음 페이지 버튼
+    
+      if (!data.last) {
+    const nextButton = document.createElement('button');
+    nextButton.textContent = '다음 >';
+    nextButton.onclick = () => fetchComments(voteId, data.number + 1, size);
+    nextButton.setAttribute('id', 'nextButton'); // id 부여
+    paginationDiv.appendChild(nextButton);
+} else {
+    const nextButton = document.getElementById('nextButton');
+    if (nextButton) {
+        paginationDiv.removeChild(nextButton); // 버튼 제거
+    }
+}
+    
+}
+
+
 
     function createCommentElement(comment) {
         const commentDiv = document.createElement('div');
@@ -161,10 +214,11 @@ document.addEventListener("DOMContentLoaded", function() {
         commentDiv.innerHTML = `
             <h4>${comment.member.nickname}</h4>
             <p>${comment.content}</p>
-            <p>작성일: ${comment.replyCreate}</p>
+            <h5>${comment.replyCreate}</h5>
             <button class="menu-button">...</button>
             <button class="edit-button" style="display:none;">수정</button>
     		<button class="delete-button" style="display:none;">삭제</button>
+    		<h6></h6>
             <div class="edit-form" style="display:none;">
                 <textarea class="edit-content">${comment.content}</textarea>
                 <button class="save-edit-button">저장</button>
@@ -178,10 +232,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const saveEditButton = editForm.querySelector('.save-edit-button');
         const cancelEditButton = editForm.querySelector('.cancel-edit-button');
         const editContent = editForm.querySelector('.edit-content');
-		menuButton.addEventListener('click', function(){
-   			 editButton.style.display = 'block';
-    		deleteButton.style.display = 'block';
-    	});
+		menuButton.addEventListener('click', function() {
+    		// 현재 display 상태를 확인하고 토글
+   		 	if (editButton.style.display === 'none' && deleteButton.style.display === 'none') {
+        			editButton.style.display = 'block';
+        			deleteButton.style.display = 'block';
+    		} 	else {
+        			editButton.style.display = 'none';
+        			deleteButton.style.display = 'none';
+        			editForm.style.display = 'none';
+    		}
+		});
         editButton.addEventListener('click', function() {
             editForm.style.display = 'block';
         });
@@ -203,12 +264,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateComment(replyId, updatedContent, commentElem) {
+		 const currentDate = new Date().toISOString();  // 현재 시간을 ISO 포맷으로 가져옴
         fetch(`/api/replies/${replyId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ content: updatedContent }),
+            body: JSON.stringify({ content: updatedContent, replyModify: currentDate }),
         })
         .then(response => {
             if (!response.ok) {
@@ -254,7 +316,6 @@ document.addEventListener("DOMContentLoaded", function() {
             member: userId,
             parentReId: null,
             replyCreate: new Date().toISOString(),
-            replyModify: new Date().toISOString(),
             voteId: voteId,
         };
 
