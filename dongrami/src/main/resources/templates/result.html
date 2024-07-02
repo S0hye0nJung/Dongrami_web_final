@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>CIRCLE TAROT</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./css/result.css" />
+</head>
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+        <!-- Navigation -->
+        <section id="nav-section">
+            <div id="left-section">
+                <div class="logo-container">
+                    <a href="#" class="logo-text">동그라미</a>
+                    <div class="hover-content">
+                        <span class="hover-text left-text">동그</span>
+                        <div class="logo-image"></div>
+                        <span class="hover-text right-text">라미</span>
+                    </div>
+                </div>
+            </div>
+            <div id="center-section">
+                <nav id="nav">
+                    <ul>
+                        <li>
+                            <a href="#">연애</a>
+                            <ul>
+                                <li><a href="#">짝사랑</a></li>
+                                <li><a href="#">연인</a></li>
+                                <li><a href="#">재회</a></li>
+                                <li><a href="#">미래 연인</a></li>
+                                <li><a href="#">결혼</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">금전</a></li>
+                        <li>
+                            <a href="#">직업</a>
+                            <ul>
+                                <li><a href="#">합격운</a></li>
+                                <li><a href="#">일 잘풀릴까?</a></li>
+                                <li><a href="#">직업추천</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">대인관계</a></li>
+                        <li><a href="#">MBTI</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="right-section">
+                <a href="login.html">로그인</a>
+                <a href="https://www.kakao.com" class="kakao-icon"><img src="images/kakaotalk.png" alt="카카오톡" /></a>
+            </div>
+        </section>
+
+        <div class="content">
+            <div class="img">
+                <img src="./images/basic_tarot.png" alt="" id="cha">
+            </div>
+            <div class="cards">
+                <div class="card" data-position="과거">과거</div>
+                <div class="card" data-position="현재">현재</div>
+                <div class="card" data-position="미래">미래</div>
+            </div>
+            <div class="interpretation">
+                <div>
+                    <span class="title">과거</span>
+                    <div class="icontent" id="past-content">해석
+                    </div>
+                </div>
+                <div>
+                    <span class="title">현재</span>
+                    <div class="icontent" id="present-content">해석1
+                    </div>
+                </div>
+                <div>
+                    <span class="title">미래</span>
+                    <div class="icontent" id="future-content">해석2
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <a href="javascript:void(0);" id="share">공유</a>
+                <a href="javascript:void(0);" id="save">저장</a>
+                <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
+            </div>
+        </div>
+
+        <!-- Review Modal -->
+        <div id="review-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>여행</h2>
+                <p>당신의 운명을 확인하셨죠? 그 경험을 나누어주세요!</p>
+                <form id="reviewForm" method="post" action="/submitReview">
+                    <div class="review-details">
+                        <div class="review-user">
+                            <img src="images/user-avatar.png" alt="User Avatar" class="user-avatar">
+                            <div class="user-info">
+                                <span class="user-name">닉네임</span>
+                                <span class="user-role">직책</span>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <label for="rating">평점 <span class="rating-score">0점</span></label>
+                            <div id="rating">
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea id="review-text" name="reviewText" placeholder="100자 미만 작성해주세요"></textarea>
+                    <div id="character-count">0/100</div>
+                    <input type="hidden" id="ratingScore" name="ratingScore" value="5">
+                    <button type="submit" id="submit-review">리뷰 작성 완료</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="./js/result.js"></script>
+    </div>
+</body>
+</html>
