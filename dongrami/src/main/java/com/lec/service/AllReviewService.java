@@ -1,12 +1,17 @@
 package com.lec.service;
 
+import com.lec.dto.AllReviewDTO;
 import com.lec.entity.Review;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface AllReviewService {
     Review saveReview(Review review);
-    List<Review> getAllReviewsWithNicknames();
-    Optional<Review> getReviewById(int id); // 리뷰 ID로 조회하는 메서드 추가
-    void deleteReview(int id); // 리뷰 삭제 메서드 추가
+
+    List<AllReviewDTO> getAllReviewsWithNicknames();  // 반환 타입을 List<AllReviewDTO>로 변경
+
+    Optional<Review> getReviewById(int id);
+
+    void deleteReview(int id);
 }

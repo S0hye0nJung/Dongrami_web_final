@@ -32,7 +32,7 @@ public class PageController {
     }
     @GetMapping("/mainvote")
     public String mainvote() {
-    	return "mainvote";
+       return "mainvote";
     }
     @GetMapping("/vote")
     public String votePage() {
@@ -41,26 +41,26 @@ public class PageController {
     
     @GetMapping("/myreview")
     public String myReview() {
-    	return "myreview";
+       return "myreview";
     }
     
     @GetMapping("/mytarotlist")
     public String myTarotList() {
-    	return "mytarotlist";
+       return "mytarotlist";
     }
     @GetMapping("/adminreview")
     public String adminReview() {
-    	return "adminreview";
+       return "adminreview";
     }
 
     @GetMapping("/find_Id")
     public String findId() {
-    	return "find_Id";
+       return "find_Id";
     }
     
     @GetMapping("/find_Pwd")
     public String findPwd() {
-    	return "find_Pwd";
+       return "find_Pwd";
     }
     
   

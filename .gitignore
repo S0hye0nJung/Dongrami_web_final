@@ -4,3 +4,7 @@ dongrami_without_security/src/main/resources/application.properties
 
 
 
+dongrami/src/main/java/com/lec/controller/MyTarotListController_BACKUP_1122.java
+dongrami/src/main/java/com/lec/controller/MyTarotListController_BASE_1122.java
+dongrami/src/main/java/com/lec/controller/MyTarotListController_LOCAL_1122.java
+dongrami/src/main/java/com/lec/controller/MyTarotListController_REMOTE_1122.java

@@ -54,13 +54,13 @@
             <img src="./images/basic.png" alt="" id="cha">
         </div>
         <div class="cards">
-            <div class="card" data-position="과거">
+            <div class="card" data-position="과거" data-card-id="${reading.cardId1}">
                 <img th:src="${reading.imageUrl1}" id="card1" />
             </div>
-            <div class="card" data-position="현재">
+            <div class="card" data-position="현재" data-card-id="${reading.cardId2}">
                 <img th:src="${reading.imageUrl2}" id="card2" />
             </div>
-            <div class="card" data-position="미래">
+            <div class="card" data-position="미래" data-card-id="${reading.cardId3}">
                 <img th:src="${reading.imageUrl3}" id="card3" />
             </div>
         </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="buttons">
             <a th:href="@{/topic}" id="more-tarot">타로 더보기</a>
-            <a href="javascript:void(0);" id="save">저장</a>
+            <a href="javascript:void(0);" id="save-result" data-web-reading-id="${reading.webReadingId}">저장</a>
             <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
         </div>
     </div>
@@ -96,7 +96,7 @@
                     <div class="review-user">
                         <img src="images/user-avatar.png" alt="User Avatar" class="user-avatar">
                         <div class="user-info">
-                            <span class="user-name">닉네임</span>
+                            <span id="review-user-name" class="user-name">닉네임</span>
                             <span class="user-role"># 소주제</span>
                         </div>
                     </div>
@@ -136,6 +136,11 @@
     </footer>
 
     <!-- Scripts -->
+    <script th:inline="javascript">
+        window.userId = /*[[${session.loggedInUser.userId}]]*/ 'null';
+        window.userNickname = /*[[${session.loggedInUser.nickname}]]*/ 'Guest';
+    </script>
+
     <script src="./js/result.js"></script>
 </body>
 </html>

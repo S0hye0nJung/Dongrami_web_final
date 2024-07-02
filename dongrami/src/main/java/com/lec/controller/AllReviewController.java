@@ -90,14 +90,14 @@ public class AllReviewController {
     }
 
     @GetMapping("/json")
-    public ResponseEntity<List<Review>> getAllReviewsJson() {
-        List<Review> reviews = allReviewService.getAllReviewsWithNicknames();
+    public ResponseEntity<List<AllReviewDTO>> getAllReviewsJson() {
+        List<AllReviewDTO> reviews = allReviewService.getAllReviewsWithNicknames();
         return ResponseEntity.ok(reviews);
     }
 
     @GetMapping
     public String getAllReviews(Model model) {
-        List<Review> reviews = allReviewService.getAllReviewsWithNicknames();
+        List<AllReviewDTO> reviews = allReviewService.getAllReviewsWithNicknames();
         model.addAttribute("reviews", reviews);
         return "allreview"; // Thymeleaf 템플릿 이름
     }
