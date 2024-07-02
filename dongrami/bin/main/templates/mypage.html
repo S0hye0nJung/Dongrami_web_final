@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/mypage.css}">
+  <title>Document</title>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+        <div class="logo-container">
+            <a href="#" class="logo-text">CIRCLE TAROT</a>
+            <div class="hover-content">
+                <span class="hover-text left-text">동그</span>
+                <div class="logo-image"></div>
+                <span class="hover-text right-text">라미</span>
+            </div>
+        </div>
+
+      <div id="right-section">
+               <!-- 로그인하지 않은 경우 -->
+               <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+                        
+                <!-- 로그인한 경우 -->
+                <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
+                     <a href="#" id="userName" class="dropdown-toggle">
+                         <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
+                         <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+                     </a>
+                     <div id="userDropdown" class="dropdown-menu">
+                          <a th:href="@{/mypage}">마이페이지</a>
+                          <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+                     </div>
+                 </div>
+            </div>
+      
+    </div>
+</header>
+
+<!-- Nav Bar -->
+
+<section id="nav-section">
+  <div id="center-section">
+      <nav id="nav">
+          <ul>
+              <li>
+                  <a href="#">HOME</a>
+                  <!--
+                  <ul>
+                      <li><a href="#">짝사랑</a></li>
+                      <li><a href="#">연인</a></li>
+                      <li><a href="#">재회</a></li>
+                      <li><a href="#">미래 연인</a></li>
+                      <li><a href="#">결혼</a></li>
+                  </ul>
+                  -->
+              </li>
+              <li><a href="no-sidebar.html">타로 보러가기</a></li>
+              <li>
+                  <a href="#">투표</a>
+                  <!--
+                  <ul>
+                      <li><a href="#">합격운</a></li>
+                      <li><a href="#">일 잘풀릴까?</a></li>
+                      <li><a href="#">직업추천</a></li>
+                  </ul>
+                  -->
+              </li>
+              <li><a th:href="@{/review}">후기</a></li>
+          </ul>
+      </nav>
+  </div>
+</section>
+
+  <!-- Profile-box -->
+
+  <div class="profile-box">
+    <img th:src="@{/images/basic.png}" alt="Profile Photo" class="profile-photo" style="border: 1px solid #ccc;">
+    <h2 class="username" th:text="${session.loggedInUser.nickname}">사용자 이름</h2>
+    <a href="#" class="edit-link"><img th:src="@{/images/gear.png}" alt="Edit"></a>
+  </div>
+
+  <!-- Menu -->
+
+      <div class="menu">
+        <div class="past-menu">
+          <a href="#">이전에 봤던 결과 보기</a>
+        </div>
+        <div class="comment">
+          <a th:href="@{/mycomments}">내가 쓴 댓글</a>
+        </div>
+        <div class="review">
+          <a th:href="@{/myreviews}">내가 쓴 리뷰</a>
+        </div>
+      </div>
+  </body>
+  </html>

@@ -1,0 +1,9 @@
+diff a/dongrami_without_security/src/main/java/com/lec/controller/SubcategoryController.java b/dongrami_without_security/src/main/java/com/lec/controller/SubcategoryController.java	(rejected hunks)
+@@ -38,6 +38,7 @@
+         
+         // Ensure we have at least 5 elements to avoid IndexOutOfBoundsException
+         if (top5Subcategories.size() >= 5) {
++            model.addAttribute("ranking1", top5Subcategories.get(0).getBubble_slack_name());
+             model.addAttribute("ranking2", top5Subcategories.get(1).getBubble_slack_name());
+             model.addAttribute("ranking3", top5Subcategories.get(2).getBubble_slack_name());
+             model.addAttribute("ranking4", top5Subcategories.get(3).getBubble_slack_name());

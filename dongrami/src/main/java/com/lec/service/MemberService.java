@@ -1,8 +1,7 @@
 package com.lec.service;
 
 import java.text.ParseException;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 import com.lec.dto.MemberDTO;
 import com.lec.entity.Member;
@@ -13,6 +12,6 @@ public interface MemberService {
 	Date getCurrentDate() throws ParseException;
 	String generateString();
 	String generateRandomString(String source, int length, Random random);
-	
-
+	List<Member> findByNickname(String nickname);
+	public boolean findPassword(String email);
 }

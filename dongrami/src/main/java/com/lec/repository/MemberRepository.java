@@ -1,6 +1,6 @@
 package com.lec.repository;
 
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +15,7 @@ public interface MemberRepository extends JpaRepository<Member, String>{
     Optional<Member> findByUserId(String userId);
     Member findByEmail(String email);
     Member findByEmailAndProvider(String email, String provider);
+    List<Member> findAllByNickname(String nickname);  // List<Member> 반환
+    
 }
 
