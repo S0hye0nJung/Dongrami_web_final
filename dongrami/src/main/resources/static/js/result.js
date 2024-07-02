@@ -1,23 +1,33 @@
 $(document).ready(function() {
     console.log('Document ready'); // 문서 준비 로그
-    
+
     // URL에서 subcategoryId 추출
     const urlParams = new URLSearchParams(window.location.search);
     const subcategoryId = urlParams.get('subcategory_id'); // URL에서 subcategory_id 값을 가져옴
 
-    // 사용자의 닉네임을 가져오기
-    const userId = 1; // 실제 사용자 ID 데이터를 사용해야 합니다.
-    const resultId = 1; // 실제 결과 ID 데이터를 사용해야 합니다.
+    // 사용자의 닉네임과 ID를 가져오기
+    const userId = window.userId || 'undefined'; // HTML에서 전달된 사용자 ID 사용
+    const userNickname = window.userNickname; // HTML에서 전달된 닉네임 사용
+
+    console.log('User Nickname:', userNickname); // 닉네임 로그
 
     // 리뷰 쓰기 버튼 클릭 시 모달 열기
     $('#write-review').on('click', function() {
         console.log('Write review button clicked'); // 리뷰 쓰기 버튼 클릭 로그
+
+        // 닉네임 설정
+        $('#review-user-name').text(userNickname);
+
         // 서버에서 bubble_slack_name 가져오기
         $.ajax({
             type: 'GET',
             url: `/allreview/subcategory/${subcategoryId}/bubbleSlackName`,
             success: function(response) {
-                $('.user-role').text('#' + response); // bubble_slack_name 설정
+                if (response && response.bubbleSlackName) {
+                    $('.user-role').text('#' + response.bubbleSlackName); // bubble_slack_name 설정
+                } else {
+                    $('.user-role').text('#소주제'); // 기본 값 설정
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log('에러 메시지:', textStatus, errorThrown);
@@ -102,6 +112,7 @@ $(document).ready(function() {
 
         const reviewText = $('#review-text').val();
         const ratingScore = $('#ratingScore').val();
+        const resultId = window.resultId || null; // resultId가 undefined인 경우 null로 설정
 
         if (!reviewText) {
             alert('리뷰 내용을 작성해주세요.');
@@ -111,21 +122,23 @@ $(document).ready(function() {
         console.log('리뷰 텍스트:', reviewText);
         console.log('평점:', ratingScore);
         console.log('사용자 ID:', userId);
+        console.log('사용자 닉네임:', userNickname);
         console.log('소분류 ID:', subcategoryId);
         console.log('결과 ID:', resultId);
 
         // 폼 데이터를 서버로 전송
         $.ajax({
             type: 'POST',
-            url: '/allreview/submit', // 수정된 URL
+            url: '/allreview/submit',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                userId: userId, // 키 이름 수정
-                subcategoryId: subcategoryId, // 키 이름 수정
-                resultId: resultId, // 키 이름 수정
+                userId: userId,
+                nickname: userNickname, // 추가된 필드
+                subcategoryId: subcategoryId,
+                resultId: resultId,
                 rating: ratingScore,
-                reviewText: reviewText // 키 이름 수정
+                reviewText: reviewText
             }),
             success: function(response) {
                 console.log('서버 응답:', response);
@@ -145,16 +158,34 @@ $(document).ready(function() {
 
         console.log('Save button clicked'); // 버튼 클릭 로그
 
+        // 각 카드의 ID와 webReadingId를 가져옴
+        const card1Id = $('#card1').parent().data('card-id') || null;
+        const card2Id = $('#card2').parent().data('card-id') || null;
+        const card3Id = $('#card3').parent().data('card-id') || null;
+        const webReadingId = $('#web-reading').data('web-reading-id') || null;
+
+        // 디버깅을 위해 콘솔 로그 추가
+        console.log('card1Id:', card1Id);
+        console.log('card2Id:', card2Id);
+        console.log('card3Id:', card3Id);
+        console.log('webReadingId:', webReadingId);
+
+        if (card1Id === null || card2Id === null || card3Id === null || webReadingId === null) {
+            console.error('One or more IDs are not set');
+            alert('올바른 카드 ID 및 webReading ID 값을 설정해주세요.');
+            return;
+        }
+
         const resultData = {
             resultId: 0, // 실제 결과 ID로 대체 (예: 0은 새 결과를 의미)
-            userId: 1, // 실제 사용자 ID로 대체
+            userId: userId, // 실제 사용자 ID로 대체
             position1: '과거', // 실제 값으로 대체
             position2: '현재', // 실제 값으로 대체
             position3: '미래', // 실제 값으로 대체
-            cardId1: 1, // 실제 카드 ID로 대체
-            cardId2: 2, // 실제 카드 ID로 대체
-            cardId3: 3, // 실제 카드 ID로 대체
-            webReadingId: 1 // 실제 webReading ID로 대체
+            cardId1: card1Id, // 추출된 카드 ID
+            cardId2: card2Id, // 추출된 카드 ID
+            cardId3: card3Id, // 추출된 카드 ID
+            webReadingId: webReadingId // 추출된 webReading ID
         };
 
         console.log('Sending data:', resultData); // 요청 데이터 로그

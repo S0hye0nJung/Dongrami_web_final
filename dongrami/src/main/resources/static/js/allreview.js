@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pageReviews.forEach(review => {
             const reviewId = review.reviewId || 'invalid-id';
             const rating = review.rating ? review.rating : 0;
-            const nickname = review.memberNickname || '닉네임';
-            const subcategoryName = review.subcategory.bubble_slack_name || '소주제';
-            const subcategoryId = review.subcategory.subcategory_id; // 여기서 subcategoryId 값을 가져옵니다.
+            const nickname = review.nickname || '닉네임';
+            const subcategoryName = review.bubbleSlackName || '소주제';
+            const subcategoryId = review.subcategoryId; // 여기서 subcategoryId 값을 가져옵니다.
             const reviewCard = document.createElement('div');
             reviewCard.className = 'review-card';
             reviewCard.innerHTML = `
@@ -154,34 +154,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-	function updateAverageRating(reviews) {
-	    const totalReviews = reviews.length;
-	    const totalStars = reviews.reduce((acc, review) => acc + (review.rating || 0), 0);
-	    const averageRating = (totalStars / totalReviews).toFixed(1);
-	
-	    console.log('Average Rating:', averageRating);
-	
-	    ratingValueElement.textContent = averageRating;
-	    ratingDetailsElement.textContent = `${totalReviews}개의 리뷰`;
-	
-	    // 별점 요소들을 모두 초기화
-	    starElements.forEach(star => {
-	        star.classList.remove('filled', 'half-filled');
-	    });
-	
-	    // 새로운 평균 별점을 기준으로 별점 업데이트
-	    starElements.forEach((star, index) => {
-	        if (index < Math.floor(averageRating)) {
-	            star.classList.add('filled');
-	        } else if (index === Math.floor(averageRating)) {
-	            const fractionalPart = averageRating - Math.floor(averageRating);
-	            if (fractionalPart >= 0.5) {
-	                star.classList.add('half-filled');
-	            }
-	        }
-	    });
-	}
+    function updateAverageRating(reviews) {
+        const totalReviews = reviews.length;
+        const totalStars = reviews.reduce((acc, review) => acc + (review.rating || 0), 0);
+        const averageRating = (totalStars / totalReviews).toFixed(1);
 
+        console.log('Average Rating:', averageRating);
+
+        ratingValueElement.textContent = averageRating;
+        ratingDetailsElement.textContent = `${totalReviews}개의 리뷰`;
+
+        // 별점 요소들을 모두 초기화
+        starElements.forEach(star => {
+            star.classList.remove('filled', 'half-filled');
+        });
+
+        // 새로운 평균 별점을 기준으로 별점 업데이트
+        starElements.forEach((star, index) => {
+            if (index < Math.floor(averageRating)) {
+                star.classList.add('filled');
+            } else if (index === Math.floor(averageRating)) {
+                const fractionalPart = averageRating - Math.floor(averageRating);
+                if (fractionalPart >= 0.5) {
+                    star.classList.add('half-filled');
+                }
+            }
+        });
+    }
 
     function renderReviewCount(reviews) {
         if (reviewCountElement) {
@@ -199,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const updatedReview = {
             rating: parseInt($('#ratingScore').val()) || 0,
             reviewText: $('#review-text').val() || "",
-            userId: '1', // 실제 유저 아이디로 설정
+            userId: window.userId, // 실제 유저 아이디로 설정
             subcategoryId: parseInt(subcategoryId) || 0, // 가져온 subcategoryId 값을 설정합니다.
             resultId: 1 // 실제 결과 아이디로 설정
         };
