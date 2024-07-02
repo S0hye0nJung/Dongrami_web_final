@@ -3,7 +3,9 @@ package com.lec.Impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,12 +20,15 @@ import com.lec.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService{
+	
+	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	public Date birthDay = null;
 	
 	@Autowired
 	MemberRepository memberrepository;
 
-
+	@Autowired
+	EmailServiceImpl emailService;
 	
 	public Member join(MemberDTO memberDTO) throws ParseException {
 		
@@ -42,7 +47,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		member.setUserId(userId);
 
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
 		member.setBirthDate(birthDay);
 		member.setCreateDate(createDate);
@@ -86,6 +90,37 @@ public class MemberServiceImpl implements MemberService{
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			return dateFormat.parse(birthday);
 		}
+
+
+	// 아이디 찾기
+	@Override
+	public List<Member> findByNickname(String nickname) {
+		return memberrepository.findAllByNickname(nickname);
+	}
+
+
+	// 비밀번호 찾기
+	@Override
+	public boolean findPassword(String email) {
+		
+		Member member = memberrepository.findByEmail(email);
+        if (member != null) {
+            String tempPassword = generateTempPassword();
+            member.setPassword(passwordEncoder.encode(tempPassword));
+            memberrepository.save(member);
+            emailService.sendTempPassword(email, tempPassword);
+            return true;
+        }
+        return false;
+		
+	}
+	
+	private String generateTempPassword() {
+		Random random = new Random();
+		return String.format("%08d", random.nextInt(100000000));
+	}
+	
+	
 }
 
 

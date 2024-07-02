@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--
+	Escape Velocity by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>동그라미</title>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
+		<link rel="stylesheet" th:href="@{/css/nav_footer.css}" />
+		<link rel="stylesheet" media="screen" th:href="@{/css/votepage.css}">
+
+	</head>
+	<body>
+
+		<header>
+		  <div class="header-container">
+		    <div class="logo-container">
+		      <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
+		      <div class="hover-content">
+		        <span class="hover-text left-text">동그</span>
+		        <div class="logo-image"></div>
+		        <span class="hover-text right-text">라미</span>
+		      </div>
+		    </div>
+
+			<div id="right-section">
+				      <!-- 로그인하지 않은 경우 -->
+				      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+				               
+				       <!-- 로그인한 경우 -->
+				       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
+				            <a href="#" id="userName" class="dropdown-toggle">
+				                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
+				                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+				            </a>
+				            <div id="userDropdown" class="dropdown-menu">
+				                 <a th:href="@{/mypage}">마이페이지</a>
+				                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+				            </div>
+				        </div>
+				   </div>
+		  </div>
+		</header>
+		
+
+
+		<section id="nav-section">
+		  <div id="center-section">
+		    <nav id="nav">
+		      <ul>
+		        <li>
+		          <a th:href="@{/}">HOME</a>
+		        </li>
+		        <li><a th:href="@{/topic}">타로 보러가기</a></li>
+		        <li>
+		          <a th:href="@{/vote}">투표</a>
+		        </li>
+		        <li><a th:href="@{/review}">후기</a></li>
+		      </ul>
+		    </nav>
+		  </div>
+		</section>
+
+		    <section id="content-section">
+		      <div class="banner">
+		        <div class="inner-container">
+		          <div class="card-container">
+		            <div class="tarot-card" style="transform: rotate(-60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드1" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(-40deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드2" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(-20deg)">
+		              <img src="images/부엉이카드.jpg" alt="카드3" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(0deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드4" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(20deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드5" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(40deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드6" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드7" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드8" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드9" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드10" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드11" />
+		            </div>
+		          </div>
+		          <div class="content-text">
+		            <h1>동그라미 타로</h1>
+		            <p>
+		              당신의 운명을 밝혀줄💡 타로 카드와 함께,
+		            </p>
+		            <p>
+		              당신의 여정을 시작하세요.
+		            </p>
+		          </div>
+		        </div>
+		      </div>
+							 <div id="vote-list"></div>
+							 <div id="pagination">
+							     <button id="prevPage">이전</button>
+							     <span id="currentPage">1</span>
+							     <button id="nextPage">다음</button>
+							 </div>
+		
+
+					
+					
+					<footer>
+					  <div class="footer-wrapper">
+					    <div class="footer-company">
+					      <label class="footer-label">CIRCLE TAROT</label>
+					      <div class="description">
+					        <div class="footer-companyinfo">
+					          <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+					        </div>
+					        <div class="copyright">
+					          <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+					        </div>
+					      </div>
+					</footer>
+				
+
+					<!-- Scripts -->
+						<script th:src="@{/js/jquery.min.js}"></script>
+						<script th:src="@{/js/browser.min.js}"></script>
+						<script th:src="@{/js/breakpoints.min.js}"></script>
+						<script th:src="@{/js/util.js}"></script>
+						<script th:src="@{/js/votepage.js}"></script>
+						<script th:src="@{/js/tarot_card.js}"></script>
+
+
+	</body>
+</html>

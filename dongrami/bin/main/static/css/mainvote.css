@@ -1,0 +1,294 @@
+/* styles.css */
+.vote-bar {
+    margin-top: 50px;
+    margin-left: 100px;
+    color: black;
+}
+
+.vote-bar > h1, h2 {
+    
+    text-align: left;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.vote-item {
+	margin-top: 10px;
+    margin-left: 400px;
+    width: 1100px;
+    height: 500px;
+    background-color: honeydew;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.vote-item h2 {
+	position: absolute;
+    left: 460px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.vote-item img {
+    max-width: 35%;
+    height: auto;
+    display: block;
+    margin-top: 63px;
+    margin-left: 50px;
+}
+
+.vote-item p {
+    position: relative;
+    top: -360px;
+    margin-left: 500px;
+    margin-bottom: 100px;
+}
+
+ .button-container {
+  	display: flex;
+    flex-direction: column;
+    gap: 90px;
+    position: relative;
+    top: -580px;
+        
+    }
+
+.button-container button {
+		margin-left: 950px;
+		margin-top: 10px;
+        width: 80px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+.button-container .selected{
+		background-color: orange;
+	}
+.bar-container1 {
+    display: flex;
+    width: 400px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+    top: -500px;
+    left: 650px;
+    background-color:#FF69B4;
+    margin-top:-240px;
+    margin-left: -150px;
+}
+.bar-container2{
+	display: flex;
+    width: 400px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+    top: -500px;
+    background-color: skyblue;
+    margin-top: 100px;
+    margin-left: 501px;	
+}
+
+/*#barContainer1{
+    background-color:#FF69B4;
+    margin-top:-240px;
+    margin-left: -150px;
+}
+#barContainer2{
+    background-color: skyblue;
+    margin-top: 100px;
+    margin-left: -150px;
+}*/
+.bar1 {
+    position: relative;
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+.bar2 {
+    position: relative;
+    height: 100%;
+    border-radius: 5px;
+    background-color: blue;
+}
+
+
+.text-left{
+    position:absolute;
+}
+
+#text1 {
+    color:white;
+    position:absolute;
+    top:20%;
+    left:5%;
+}
+#text2{
+    position:absolute;
+    color:white;
+    top:20%;
+    left:5%;
+}
+.percentage{
+    position: absolute;
+    color: white;
+    left: 360px;
+    top: 6px;
+}
+#replyButton{
+    position: relative;
+	top: -425px;
+    left: 680px;
+    margin-left: 10px;
+    background-color: plum; /* 버튼 배경색 */
+    border: none; /* 테두리 없애기 */
+    color: white; /* 텍스트 색상 */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px; /* 버튼 모서리 둥글게 */
+    width: 150px; /* 버튼 너비 */
+    height: 75px; /* 버튼 높이 */
+}
+  #pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 101px;
+   			 margin-left: 463px;
+			}
+
+        #pagination button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        #pagination button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #pagination span {
+            font-size: 18px;
+            margin: 0 10px;
+        }
+#comment-input{
+	width: 1100px;
+    height: 70px;
+    border: 1px solid #ddd;
+    outline: none;
+    position: absolute;
+    left: 400px;
+    top: 1200px;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    resize: none;
+}
+#comment-section{
+	position:absolute;
+	top:1350px;
+	left:400px;
+	width:1100px;
+}
+#submitComment{
+	position:absolute;
+    top: 1282px;
+    left: 1400px;
+	padding: 0;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    width:100px;
+    height:50px;
+}
+h3{
+	position:absolute;
+	top:1150px;
+	left:400px;
+}
+h5{
+	border-bottom: 1px solid #ccc;
+}
+
+/* 로그인 시 네비바 바뀌는 부분 스타일 */
+#userDropdownContainer {
+  position: relative;
+}
+
+#userName {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#userDropdown {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 180px;  /* 넓이를 180px로 증가 */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  top: 100%;
+  border-radius: 4px;
+  padding: 10px 0;  /* 상하 패딩 추가 */
+}
+
+#userDropdownContainer:hover #userDropdown {
+  display: block;
+}
+
+#userDropdown a {
+  color: #333;
+  padding: 12px 20px;  /* 좌우 패딩 증가 */
+  text-decoration: none;
+  display: block;
+  text-align: left;  /* 텍스트 왼쪽 정렬 */
+  font-size: 14px;  /* 글자 크기 조정 */
+}
+
+#userDropdown a:hover {
+  background-color: #f1f1f1;
+}
