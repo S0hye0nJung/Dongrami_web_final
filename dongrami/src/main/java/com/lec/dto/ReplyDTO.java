@@ -34,7 +34,7 @@ public class ReplyDTO {
         this.userNickname = reply.getMember().getNickname();
     }
 
-    // Getter 및 Setter 메소드들
+    // 기존 Getter 및 Setter 메소드들 유지
     public int getReplyId() {
         return replyId;
     }
@@ -118,4 +118,6 @@ public class ReplyDTO {
     public void addChild(ReplyDTO child) {
         this.children.add(child);
     }
+
+    // 추가적인 메서드나 필드가 필요하다면 여기 추가
 }

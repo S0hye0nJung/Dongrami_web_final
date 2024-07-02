@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const repliesPerPage = 10;
     let currentPage = 1;
+    let replies = [];
 
     function displayReplies(page) {
         const replySection = document.getElementById('reply-section');
@@ -77,16 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        const replyLinks = document.querySelectorAll('.reply-link');
-        replyLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const replyId = this.getAttribute('data-id');
-                const replyPage = this.getAttribute('data-page');
-                window.location.href = `/vote?page=${replyPage}&replyId=${replyId}`;
-            });
-        });
-
         const editButtons = document.querySelectorAll('.edit-button');
         for (let editButton of editButtons) {
             editButton.addEventListener('click', function() {
@@ -142,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const row = checkbox.closest('tr');
                 const index = Array.from(row.parentNode.children).indexOf(row) - 1 + startIndex;
                 $.ajax({
-                    url: `/api/reply/delete/${replies[index].replyId}`,
+                    url: `/api/replies/${replies[index].replyId}`,
                     method: 'DELETE',
                     success: () => {
                         replies.splice(index, 1);
@@ -183,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadReplies() {
         const userId = '123'; // 실제 사용자 ID로 변경 필요
         $.ajax({
-            url: `/myreply?userId=${userId}`, // 사용자 댓글 불러오기
+            url: `/api/replies/user/${userId}`, // 사용자 댓글 불러오기
             method: 'GET',
             success: (data) => {
                 replies = data;
@@ -210,23 +201,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('cancel-reply').addEventListener('click', closeModal);
 
+    // 댓글 데이터 업데이트 후 화면에 반영하기 위한 함수
+    function updateReply(replyId, updatedContent) {
+        const replyRows = document.querySelectorAll('tr[data-reply-id]');
+        replyRows.forEach(row => {
+            if (row.dataset.replyId == replyId) {
+                row.querySelector('td:nth-child(4) a').textContent = updatedContent;
+            }
+        });
+    }
+
+    // 댓글 저장 버튼 클릭 이벤트 핸들러 수정
     document.getElementById('save-reply').addEventListener('click', (event) => {
         event.preventDefault();
         const replyId = $('#replyId').val();
         const updatedContent = $('#reply-text').val();
         $.ajax({
-            url: '/api/reply/update',
+            url: '/api/replies/update',
             method: 'POST',
             data: JSON.stringify({ replyId: replyId, content: updatedContent }),
             contentType: 'application/json',
             success: () => {
-                loadReplies();
+                loadReplies(); // 전체 댓글 목록을 다시 불러오기
+                updateReply(replyId, updatedContent); // 변경된 댓글 내용을 화면에 업데이트
                 closeModal();
             },
             error: (err) => {
                 console.error('Failed to update reply', err);
             }
         });
+    });
+
+    // 댓글 추가 로직
+    document.getElementById('add-reply').addEventListener('click', (event) => {
+        event.preventDefault();
+        const newReplyContent = prompt("댓글 내용을 입력하세요:");
+        if (newReplyContent) {
+            const newReply = {
+                userId: '123',  // 실제 사용자 ID로 변경 필요
+                content: newReplyContent,
+                question: "새 투표 주제",  // 실제 투표 주제로 변경 필요
+                replyCreate: new Date().toISOString()  // 현재 시간으로 설정
+            };
+            $.ajax({
+                url: '/api/replies/create',  // 댓글 생성 엔드포인트
+                method: 'POST',
+                data: JSON.stringify(newReply),
+                contentType: 'application/json',
+                success: () => {
+                    loadReplies();  // 댓글 생성 후 댓글 목록 업데이트
+                },
+                error: (err) => {
+                    console.error('Failed to create reply', err);
+                }
+            });
+        }
     });
 
     window.addEventListener('click', (event) => {
