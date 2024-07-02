@@ -41,6 +41,8 @@ public class Reply {
     @JoinColumn(name = "user_id", nullable = false)
     private Member member;
     
+   
+    
     
     
     @Builder
