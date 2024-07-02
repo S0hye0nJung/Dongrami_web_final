@@ -36,6 +36,8 @@ package com.lec.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,11 +65,18 @@ public class ReplyController {
         return reply != null ? ResponseEntity.ok(reply) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/vote/{voteId}")
-    public List<Reply> getRepliesByVoteId(@PathVariable("voteId") int voteId) {
-        return replyService.getRepliesByVoteId(voteId);
+	/*
+	 * @GetMapping("/vote/{voteId}") public List<Reply>
+	 * getRepliesByVoteId(@PathVariable("voteId") int voteId) { return
+	 * replyService.getRepliesByVoteId(voteId); }
+	 */
+    @GetMapping("/{voteId}/replies")
+    public Page<Reply> getRepliesByVoteId(
+        @PathVariable("voteId") int voteId,
+        Pageable pageable
+    ) {
+        return replyService.getRepliesByVoteId(voteId, pageable);
     }
-
     @PostMapping("/{voteId}")
     public ResponseEntity<Reply> addReplyToVote(
             @PathVariable("voteId") int voteId,

@@ -1,9 +1,11 @@
 package com.lec.service;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +25,18 @@ public class ReplyService {
     private VoteRepository voteRepository;
 
     public List<Reply> getAllReplies() {
-        return replyRepository.findAll();
+    	return replyRepository.findAll();
     }
-
     public Reply getReplyById(int id) {
         return replyRepository.findById(id).orElse(null);
     }
 
-    public List<Reply> getRepliesByVoteId(int voteId) {
-        return replyRepository.findByVoteId(voteId);
+	/*
+	 * public List<Reply> getRepliesByVoteId(int voteId) { return
+	 * replyRepository.findByVoteId(voteId); }
+	 */
+    public Page<Reply> getRepliesByVoteId(int voteId, Pageable pageable) {
+        return replyRepository.findByVoteId(voteId, pageable);
     }
 
     public ReplyDTO createReply(ReplyDTO replyDTO) {
@@ -57,25 +62,13 @@ public class ReplyService {
         return replyRepository.save(newReply);
     }
     public Reply updateReply(int replyId, Reply replyDetails) {
-        Reply reply = replyRepository.findById(replyId).orElse(null);
-        
-        if (reply != null) {
-            System.out.println("Original Reply: " + reply);
-            System.out.println("Update details: " + replyDetails);
-
-            reply.setContent(replyDetails.getContent());
-            reply.setLevel(replyDetails.getLevel());
-            // reply.setReplyCreate(replyDetails.getReplyCreate()); // Generally not updated on edit
-            reply.setReplyModify(LocalDate.now()); // Update to current time
-            reply.setParentReId(replyDetails.getParentReId());
-            reply.setVote(replyDetails.getVote());
-            reply.setMember(replyDetails.getMember());
-            
-            Reply savedReply = replyRepository.save(reply);
-            System.out.println("Saved Reply: " + savedReply);
-            return savedReply;
+        Optional<Reply> optionalReply = replyRepository.findById(replyId);
+        if (optionalReply.isPresent()) {
+            Reply existingReply = optionalReply.get();
+            existingReply.setContent(replyDetails.getContent());
+            existingReply.setReplyModify(replyDetails.getReplyModify());
+            return replyRepository.save(existingReply);
         } else {
-            System.out.println("Reply not found with id: " + replyId);
             return null;
         }
     }

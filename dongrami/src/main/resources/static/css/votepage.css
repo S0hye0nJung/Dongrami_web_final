@@ -12,7 +12,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
 }
 
 h1 {
@@ -20,15 +20,13 @@ h1 {
 }
 
 .vote-item {
-	margin-top: 10px;
-    margin-left: 400px;
-    width: 1100px;
-    height: 500px;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 100%;
+    height: 600px;
     background-color: honeydew;
-    border: 1px solid #ccc;
-    border-radius: 10px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 20px
 }
 
 .vote-item h2 {
@@ -39,17 +37,17 @@ h1 {
 }
 
 .vote-item img {
-    max-width: 35%;
+    max-width: 400px;
     height: auto;
     display: block;
     margin-top: 63px;
-    margin-left: 50px;
+    margin-left: 440px;
 }
 
 .vote-item p {
     position: relative;
     top: -360px;
-    margin-left: 500px;
+    left: 960px;
     margin-bottom: 100px;
 }
 
@@ -63,17 +61,17 @@ h1 {
     }
 
 .button-container button {
-		margin-left: 950px;
-		margin-top: 10px;
-        width: 80px;
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: #ffffff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+    margin-left: 1401px;
+    margin-top: 10px;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     }
 .button-container .selected{
 		background-color: orange;
@@ -86,13 +84,13 @@ h1 {
     position: relative;
     border-radius: 5px;
     top: -500px;
-    left: 650px;
-    background-color:#FF69B4;
-    margin-top:-240px;
+    left: 1110px;
+    background-color: #FF69B4;
+    margin-top: -240px;
     margin-left: -150px;
 }
 .bar-container2{
-	display: flex;
+    display: flex;
     width: 400px;
     height: 30px;
     cursor: pointer;
@@ -101,7 +99,7 @@ h1 {
     top: -500px;
     background-color: skyblue;
     margin-top: 100px;
-    margin-left: 501px;	
+    left: 959px;
 }
 
 /*#barContainer1{
@@ -152,57 +150,86 @@ h1 {
 }
 #replyButton{
     position: relative;
-	top: -425px;
-    left: 680px;
+    top: -425px;
+    left: 1113px;
     margin-left: 10px;
-    background-color: plum; /* 버튼 배경색 */
-    border: none; /* 테두리 없애기 */
-    color: white; /* 텍스트 색상 */
+    background-color: plum;
+    border: none;
+    color: white;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 10px; /* 버튼 모서리 둥글게 */
-    width: 150px; /* 버튼 너비 */
-    height: 75px; /* 버튼 높이 */
+    border-radius: 10px;
+    width: 150px;
+    height: 75px;
 }
   #pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 101px;
-   			 margin-left: 463px;
-			}
-
-        #pagination button {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        #pagination button:hover {
-            background-color: #0056b3;
-        }
-
-        #pagination button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
-        #pagination span {
-            font-size: 18px;
-            margin: 0 10px;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+.pageContainer{
+	position:relative;
+}
+    #prevPage {
+	position: relative;
+    width: 50px;
+    height:30px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    left: 790px;
+   	top: 59px;
+    text-align:center;
+    padding: 4.5px 3px;
+    }
+	#pageNumbers button{
+		width:30px;
+		height:30px;
+		margin:5px;
+		background-color: white;
+		color: black;
+		position:relative;
+    	left: 860px;
+    	top: 24px;
+		border: none;
+	}
+	#nextPage{
+	position: relative;
+    width: 50px;
+    height:30px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    top: -11px;
+    left: 1080px;
+    text-align:center;
+    padding: 4.5px 3px;
+	}
+      #prevPage:hover, #nextPage:hover{
+        box-shadow: 0 0 0 1px gray; /* 회색 테두리 효과 */
+    }
+	#pageNumbers button:hover{
+		box-shadow: 0 0 0 1px gray; /* 회색 테두리 효과 */
+	}
+    #pageNumbers button .current-page {
+		color: blue;
+        border: 1px solid #ccc	;
         
+    }
+    #currentPage{
+		display: none;
+	}
+    #pagination.Button{
+		position: relative;
+  		top: 1180px;
+    	box-shadow: 0 0 0 1px gray;
+    	left: -272px;
+	}
 /* 로그인 시 네비바 바뀌는 부분 스타일 */
 #userDropdownContainer {
   position: relative;
@@ -251,3 +278,76 @@ h1 {
 #userDropdown a:hover {
   background-color: #f1f1f1;
 }
+ footer {
+    background-color: #7150bd;
+    color: white;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    top: 60px;
+  }
+  
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .footer-company {
+    margin-bottom: 20px;
+  }
+  
+  .footer-label {
+    font-size: 40px;
+    font-weight: bold;
+
+  }
+  
+  .footer-companyinfo {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  .footer-companyinfo p {
+    margin: 5px 0;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .footer-user {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 1200px) {
+    footer {
+      top: 1600px; /* 기존에 설정된 top 속성 제거 */
+      bottom: 0; /* 화면 하단에 고정 */
+    }
+  
+    .footer-wrapper {
+      padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
+    }
+    
+    .footer-label {
+      font-size: 50px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .footer-companyinfo {
+      font-size: 12px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .copyright {
+      font-size: 10px; /* 폰트 크기를 더 작게 설정 */
+    }
+  }
