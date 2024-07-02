@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic Page</title>
+	<link rel="stylesheet" th:href="@{/css/topic_page.css}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+		<div class="header-container">
+		  <div class="logo-container">
+		    <a th:href="@{/}" class="logo-text">CIRCLE TAROT</a>
+		    <div class="hover-content">
+		      <span class="hover-text left-text">동그</span>
+		      <div class="logo-image"></div>
+		      <span class="hover-text right-text">라미</span>
+		    </div>
+		  </div>
+  
+		  <div id="right-section">
+		  	      <!-- 로그인하지 않은 경우 -->
+		  	      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+		  	               
+		  	       <!-- 로그인한 경우 -->
+		  	       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
+		  	            <a href="#" id="userName" class="dropdown-toggle">
+		  	                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
+		  	                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+		  	            </a>
+		  	            <div id="userDropdown" class="dropdown-menu">
+		  	                 <a th:href="@{/mypage}">마이페이지</a>
+		  	                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+		  	            </div>
+		  	        </div>
+		  	   </div>
+		  </div>
+      </header>
+
+	  <section id="nav-section">
+	    <div id="center-section">
+	      <nav id="nav">
+	        <ul>
+	          <li>
+	            <a th:href="@{/}">HOME</a>
+	          </li>
+	          <li><a th:href="@{/topic}">타로 보러가기</a></li>
+	          <li>
+	            <a th:href="@{/vote}">투표</a>
+	          </li>
+	          <li><a th:href="@{/review}">후기</a></li>
+	        </ul>
+	      </nav>
+	    </div>
+	  </section>
+  
+      <div class="container">
+        <div id="content-header">
+            <h1>동그라미 타로</h1>
+            <h2>모아보기🔎</h2>
+        </div>
+      </div>
+
+
+	  <div class="content-text">
+	      <div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 1}">
+	          <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	             th:data-subcategory-id="${subcategory.subcategory_id}"
+	             th:data-click-count="${subcategory.count}">
+	              <div class="content-img">
+	                  <img src="/images/logo-1.png" alt="">
+	              </div>
+	              <div class="content-text">
+	                  <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	                  <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	              </div>
+	          </a>
+	      </div>	
+	  	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 2}">
+	       <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	         th:data-subcategory-id="${subcategory.subcategory_id}"
+	         th:data-click-count="${subcategory.count}">
+	          <div class="content-img">
+	              <img src="/images/logo-1.png" alt="">
+	          </div>
+	          <div class="content-text">
+	              <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	              <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	          </div>
+	      </a>
+	  </div>		
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 3}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-1.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 4}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-1.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 5}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-1.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>	
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 7}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-2.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 8}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-2.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 9}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-2.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 10}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-3.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 11}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-3.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 12}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-3.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 13}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-5.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 14}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-5.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 15}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-5.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 16}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-5.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 17}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-5.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 18}">
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
+	       th:data-subcategory-id="${subcategory.subcategory_id}"
+	       th:data-click-count="${subcategory.count}">
+	        <div class="content-img">
+	            <img src="/images/logo-5.png" alt="">
+	        </div>
+	        <div class="content-text">
+	            <div class="title" th:text="${subcategory.subcategory_name}"></div>
+	            <div class="title-name" th:text="${subcategory.maincategory.maincategory_name}"></div>
+	        </div>
+	    </a>
+	</div>
+</div>
+	
+
+	  <footer>
+	    <div class="footer-wrapper">
+	      <div class="footer-company">
+	        <label class="footer-label">CIRCLE TAROT</label>
+	        <div class="description">
+	          <div class="footer-companyinfo">
+	            <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+	          </div>
+	          <div class="copyright">
+	            <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+	          </div>
+	        </div>
+	  </footer>
+	
+	  <script th:src="@{/js/topicpage.js}"></script>
+</body>
+</html>
