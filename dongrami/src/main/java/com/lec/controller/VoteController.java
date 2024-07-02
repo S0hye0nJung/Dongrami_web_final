@@ -49,27 +49,37 @@ public class VoteController {
 	}
 
 	// 투표 업데이트
-	 @PutMapping("/{id}")
-	    public ResponseEntity<Vote> updateVote(@PathVariable("id") int id, @RequestBody Map<String, String> payload) {
-	        Optional<Vote> optionalVote = voteService.getVoteById(id);
-	        if (optionalVote.isEmpty()) {
-	            return ResponseEntity.notFound().build();
-	        }
 
-	        Vote vote = optionalVote.get();
-	        String option = payload.get("option");
+    @PutMapping("/{id}")
+    public ResponseEntity<Vote> updateVote(@PathVariable("id") int id, @RequestBody Map<String, String> payload) {
+        Optional<Vote> optionalVote = voteService.getVoteById(id);
+        if (optionalVote.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
-	        if ("option1".equals(option)) {
-	            vote.setOption1Count(vote.getOption1Count() + 1);
-	        } else if ("option2".equals(option)) {
-	            vote.setOption2Count(vote.getOption2Count() + 1);
-	        } else {
-	            return ResponseEntity.badRequest().build();
-	        }
+        Vote vote = optionalVote.get();
+        String option = payload.get("option");
+        String previousOption = payload.get("previousOption"); // 클라이언트에서 이전 옵션을 받아옴
 
-	        Vote updatedVote = voteService.updateVote(vote);
-	        return ResponseEntity.ok(updatedVote);
-	    }
+        // 이전 선택을 취소
+        if ("option1".equals(previousOption)) {
+            vote.setOption1Count(vote.getOption1Count() - 1);
+        } else if ("option2".equals(previousOption)) {
+            vote.setOption2Count(vote.getOption2Count() - 1);
+        }
+
+        // 새로운 선택 반영
+        if ("option1".equals(option)) {
+            vote.setOption1Count(vote.getOption1Count() + 1);
+        } else if ("option2".equals(option)) {
+            vote.setOption2Count(vote.getOption2Count() + 1);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Vote updatedVote = voteService.updateVote(vote);
+        return ResponseEntity.ok(updatedVote);
+    }
 	
 
 	// 투표 삭제

@@ -7,7 +7,7 @@ function getRandomInt(min, max) {
 
 document.addEventListener("DOMContentLoaded", function(){
 	const voteListDiv = document.getElementById('vote-main');
-	
+	let previousOption = null;
 	fetch('/api/votes')
         .then(response => response.json())
         .then(data=>{
@@ -96,27 +96,28 @@ document.addEventListener("DOMContentLoaded", function(){
         return voteDiv;
     }
      window.voteOption = function(voteId, option) {
-        fetch(`/api/votes/${voteId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ option: option }),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to vote');
-            }
-            return response.json();
-        })
-        .then(updatedVote => {
-            console.log('Vote successful:', updatedVote);
-            updateVoteResults(updatedVote);
-        })
-        .catch(error => {
-            console.error('Error voting:', error);
-        });
-    };
+    fetch(`/api/votes/${voteId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ option: option, previousOption: previousOption }),
+   	 	})
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to vote');
+        }
+        return response.json();
+    	})
+    .then(updatedVote => {
+        console.log('Vote successful:', updatedVote);
+        updateVoteResults(updatedVote);
+        previousOption = option; // 현재 선택을 이전 선택으로 저장
+    	})
+    .catch(error => {
+        console.error('Error voting:', error);
+    	});
+	};
     function updateVoteResults(vote) {
     const totalVotes = vote.option1Count + vote.option2Count;
     const percentage1 = totalVotes === 0 ? 0 : Math.round((vote.option1Count / totalVotes) * 100);

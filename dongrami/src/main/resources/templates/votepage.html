@@ -12,7 +12,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<title>동그라미</title>
 		<link rel="stylesheet" th:href="@{/css/index.css}" />
-		<link rel="stylesheet" th:href="@{/css/nav_footer.css}" />
 		<link rel="stylesheet" media="screen" th:href="@{/css/votepage.css}">
 
 	</head>
@@ -38,7 +37,6 @@
 				            <a href="#" id="userName" class="dropdown-toggle">
 
 				                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
-				                <img src="/images/basic.png" alt="프로필 이미지" class="profile-img">>>>>>>> main
 				                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
 				            </a>
 				            <div id="userDropdown" class="dropdown-menu">
@@ -120,12 +118,14 @@
 		          </div>
 		        </div>
 		      </div>
-							 <div id="vote-list"></div>
-							 <div id="pagination">
-							     <button id="prevPage">이전</button>
-							     <span id="currentPage">1</span>
-							     <button id="nextPage">다음</button>
-							 </div>
+			  <div id="vote-list"></div>
+			  <div class="pageContainer">
+			  <div id="prevPage">< 이전</div>
+			  <div id="pageNumbers"></div>
+			  <div id="nextPage">다음 ></div>
+			  <div id="currentPage"></div>
+			  </div>
+			
 		
 
 					
