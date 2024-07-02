@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,36 +56,29 @@
 	    </div>
 	  </section>
 
-	  <div class="container">
-	      <h2>아이디 찾기</h2>
-	      <form id="findForm">
-	          <div class="form-group">
-	              <input type="text" name="nickname" id="nickname" placeholder="닉네임" required>
-	          </div>
-	          <button type="submit" id="id-find">아이디 찾기</button>
+    <div class="container">
+        <h2>아이디 찾기</h2>
+        <form id="findForm" action="${contextPath}/member/findIdCheck" method="post">
+            <div class="form-group">
+                <input type="text" name="name" id="name" placeholder="이름">
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" id="email" placeholder="이메일">
+            </div>
+            <button type="submit" id="id-find">아이디 찾기</button>
 
-	          <div class="striped">
-	              <span class="striped-line"></span>
-	              <span class="striped-text">Or</span>
-	              <span class="striped-line"></span>
-	          </div>
+            <div class="striped">
+                <span class="striped-line"></span>
+                <span class="striped-text">Or</span>
+                <span class="striped-line"></span>
+            </div>
 
-	          <div class="login">
-	              <a th:href="@{/join}" class="button">회원가입</a>
-				  <span class="separator">|</span>
-	              <a th:href="@{/login}" class="button">로그인하기</a>
-	          </div>
-	      </form>
-	  </div>
-		  
-		  <!-- 모달 구조 -->
-		     <div id="myModal" class="modal" style="display: none;">
-		         <div class="modal-content">
-		             <span class="close" id="closeModal">&times;</span>
-		             <div id="modalMessage"></div>
-		             <a th:href="@{/login}" class="button" id="loginButton">로그인하기</a>
-		         </div>
-		     </div>
+            <div class="login">
+                <input type="submit" value="회원가입" onclick="window.location.href = 'join.html'; return false;">
+                <input type="submit" value="로그인하기" onclick="window.location.href = 'login.html'; return false;">
+            </div>
+        </form>
+    </div>
 	
 	<footer>
 		        <div class="footer-wrapper">
@@ -101,57 +94,18 @@
 		            </div>
 		</footer>
 
+    <!-- 모달 구조 -->
+    <div id="myModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p>이메일은 ******@naver.com 입니다!</p>
+            <button id="loginButton">로그인하기</button>
+        </div>
+    </div>
 		  
     <script>
-		
-		document.getElementById("findForm").addEventListener("submit", function(event) {
-		       event.preventDefault();
-		       const nickname = document.getElementById("nickname").value;
-		       fetch('/find_id', {
-		           method: 'POST',
-		           headers: {
-		               'Content-Type': 'application/x-www-form-urlencoded',
-		           },
-		           body: 'nickname=' + encodeURIComponent(nickname)
-		       })
-		       .then(response => {
-		           if (!response.ok) {
-		               throw new Error('서버 응답 오류');
-		           }
-		           return response.json();
-		       })
-		       .then(data => {
-		           const modal = document.getElementById("myModal");
-		           const modalMessage = document.getElementById("modalMessage");
-		           modalMessage.innerHTML = '';
-
-		           if (data.emails && data.emails.length > 0) {
-		               modalMessage.innerHTML = "<p>등록된 이메일 주소:</p>";
-		               data.emails.forEach(email => {
-		                   modalMessage.innerHTML += `<p>${email}</p>`;
-		               });
-		           } else {
-		               modalMessage.textContent = data.error || "해당 닉네임으로 등록된 계정을 찾을 수 없습니다.";
-		           }
-		           modal.style.display = "block";
-		       })
-		       .catch(error => {
-		           console.error('Error:', error);
-		           alert('오류가 발생했습니다. 다시 시도해주세요.');
-		       });
-		   });
-
-		        document.getElementById("closeModal").addEventListener("click", function() {
-		            document.getElementById("myModal").style.display = "none";
-		        });
-
-		        window.addEventListener("click", function(event) {
-		            if (event.target == document.getElementById("myModal")) {
-		                document.getElementById("myModal").style.display = "none";
-		            }
-		        });
         // id-find 버튼 클릭 시 모달 창 표시
-      /*  document.getElementById("id-find").addEventListener("click", function(event) {
+        document.getElementById("id-find").addEventListener("click", function(event) {
             event.preventDefault(); // 기본 동작 방지
             document.getElementById("myModal").style.display = "block";
         });
@@ -171,8 +125,7 @@
             if (event.target == document.getElementById("myModal")) {
                 document.getElementById("myModal").style.display = "none";
             }
-        }); */
-	
+        });
     </script>
 </body>
 </html>

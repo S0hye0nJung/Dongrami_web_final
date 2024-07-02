@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
     @GetMapping("/reply")
     public String commentsPage() {
-        return "myreply";
+        return "reply";
     }
     
     @GetMapping("/result")

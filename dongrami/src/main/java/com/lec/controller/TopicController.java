@@ -15,9 +15,9 @@ public class TopicController {
         
         if (subcategoryId == 1 || subcategoryId == 2 || subcategoryId == 3 || 
             subcategoryId == 4 || subcategoryId == 5 || subcategoryId == 10) {
-            return "tarot"; //3개 뽑는 페이지
+            return "tarot";
         } else {
-            return "tarot_oneSelect"; //1개 뽑는 페이지
+            return "tarot_oneSelect";
         }
     }
 }

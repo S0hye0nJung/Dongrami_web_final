@@ -85,7 +85,7 @@
     <form id="joinForm" th:action="@{/join}" method="post" th:object="${memberCreateForm}">
         <div class="form_item">
 			<h6 id="info">※ 이메일, 비밀번호, 이름은 필수 입력사항입니다.</h6>
-			<h6 id="password_info">※ 비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자(@,!,&,%,^,*,$)를 사용.</h6>
+			<h6 id="password_info">※ 비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용.</h6>
             <div class="input_with_button">
                 <input type="text" th:field="*{email}" placeholder="이메일"/>
             </div>
@@ -224,9 +224,9 @@
 	        }
 
 	        // 비밀번호 유효성 검사
-	        const passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@!&%^*$])(?=\S+$).{8,16}$/;
+	        const passwordRegex = /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,16}/;
 	        if (!passwordRegex.test($('#password').val())) {
-	            $('#valid_password').text('비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자(@,!,&,%,^,*,$)를 사용하세요.');
+	            $('#valid_password').text('비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
 	            isValid = false;
 	        } else {
 	            $('#valid_password').text('');
@@ -298,6 +298,123 @@
 	        window.location.href = '/login';
 	    }
 	});
+	
+/*	
+	function selectGender(button) {
+	    document.querySelectorAll('.form_item input[type="button"]').forEach(btn => btn.classList.remove('active'));
+	    button.classList.add('active');
+	    document.getElementById('genderInput').value = button.getAttribute('data-gender');
+	}
+
+	function populateBirthOptions() {
+	    const currentYear = new Date().getFullYear();
+	    
+	    // 년도 옵션 생성
+	    const birthYearEl = document.querySelector('#birth-year');
+	    birthYearEl.innerHTML = '<option value="" disabled selected>출생 연도</option>';
+	    for (let i = currentYear; i >= 1940; i--) {
+	        const option = document.createElement('option');
+	        option.value = i;
+	        option.textContent = i;
+	        birthYearEl.appendChild(option);
+	    }
+	    
+	    // 월 옵션 생성
+	    const birthMonthEl = document.querySelector('#birth-month');
+	    birthMonthEl.innerHTML = '<option value="" disabled selected>월</option>';
+	    for (let i = 1; i <= 12; i++) {
+	        const option = document.createElement('option');
+	        option.value = i;
+	        option.textContent = i;
+	        birthMonthEl.appendChild(option);
+	    }
+	    
+	    // 일 옵션 생성
+	    const birthDayEl = document.querySelector('#birth-day');
+	    birthDayEl.innerHTML = '<option value="" disabled selected>일</option>';
+	    for (let i = 1; i <= 31; i++) {
+	        const option = document.createElement('option');
+	        option.value = i;
+	        option.textContent = i;
+	        birthDayEl.appendChild(option);
+	    }
+	}
+
+	$(document).ready(function() {
+	    populateBirthOptions();
+
+	    $('#joinForm').submit(function(e) {
+	        e.preventDefault();
+	        let isValid = true;
+
+	        // 이메일 유효성 검사
+	        const emailRegex = /^(?:\w+\.?)*\w+@(?:\w+\.)+\w+$/;
+	        if (!emailRegex.test($('#email').val())) {
+	            $('#valid_email').text('이메일 형식이 올바르지 않습니다.').css('color','red');
+	            isValid = false;
+	        } else {
+				$('#valid_email').text('');
+			}
+
+	        // 비밀번호 유효성 검사
+	        const passwordRegex = /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,16}/;
+	        if (!passwordRegex.test($('#password').val())) {
+	            $('#valid_password').text('비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
+	            isValid = false;
+	        } else {
+	            $('#valid_password').text('');
+	        }
+
+	        // 비밀번호 확인
+	        if ($('#password').val() !== $('#password2').val()) {
+	            $('#valid_password2').text('비밀번호가 일치하지 않습니다.');
+	            isValid = false;
+	        } else {
+	            $('#valid_password2').text('');
+	        }
+
+	        // 닉네임 검사
+	        if ($('#nickname').val().trim() === '') {
+	            $('#valid_nickname').text('이름은 필수 입력입니다.');
+	            isValid = false;
+	        } else {
+	            $('#valid_nickname').text('');
+	        }
+
+			// 생년월일 검사
+			let birthYear = $('#birth-year').val();
+			let birthMonth = $('#birth-month').val();
+			let birthDay = $('#birth-day').val();
+					
+			// 디버깅을 위한 콘솔 로그
+			console.log("Birth Year:", birthYear);
+			console.log("Birth Month:", birthMonth);
+			console.log("Birth Day:", birthDay);
+			console.log("Is Valid:", isValid);
+			
+			if (birthYear === '') {
+			    $('#valid_birthday').text('출생년도, 월, 일을 모두 선택해주세요.');
+			    isValid = false;
+			} else {
+			    $('#valid_birthday').text('');
+			}
+			
+			console.log("Form validity:", isValid);
+			
+			
+			if (isValid) {
+			    console.log("Form is valid, submitting...");
+			    this.submit();
+			} else {
+			    console.log("Form is not valid");
+			}
+			
+	        if (isValid) {
+	            this.submit();
+	        }
+	    });
+	});
+*/	
 </script>
 
 

@@ -1,8 +1,8 @@
 package com.lec.controller;
 
 import java.text.ParseException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lec.dto.MemberDTO;
@@ -75,41 +74,9 @@ public class MemberController {
             model.addAttribute("provider", session.getAttribute("provider"));
         } else {
             System.out.println("로그인하지 않은 사용자");
+            return "index";
         }
         return "index";
     }
-    
-    @PostMapping("/find_id")
-    @ResponseBody
-    public Map<String, Object> findId(@RequestParam("nickname") String nickname) {
-        List<Member> members = memberService.findByNickname(nickname);
-        Map<String, Object> response = new HashMap<>();
-        if (!members.isEmpty()) {
-            List<String> emails = members.stream()
-                                         .map(Member::getEmail)
-                                         .collect(Collectors.toList());
-            response.put("emails", emails);
-        } else {
-            response.put("error", "해당 닉네임으로 등록된 계정을 찾을 수 없습니다.");
-        }
-        return response;
-    }
-    
-    @PostMapping("/find_password")
-    @ResponseBody
-    public Map<String, Object> findPassword(@RequestParam("email") String email) {
-        Map<String, Object> response = new HashMap<>();
-        boolean isSuccess = memberService.findPassword(email);
-        if (isSuccess) {
-            response.put("success", true);
-            response.put("message", "임시 비밀번호가 이메일로 전송되었습니다.");
-        } else {
-            response.put("success", false);
-            response.put("error", "해당 이메일로 등록된 계정을 찾을 수 없습니다.");
-        }
-        return response;
-    }
-    
-    
 
 }

@@ -367,23 +367,16 @@ input[type="text"] {
     height: 40px;
 }
 
-
 .form_item input[type="button"] {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
-	width: calc(50% - 100px); /* 버튼 사이 간격 조정 */
-	padding : 0;
-	margin: 0 5px 0 0;
-	background-color: white;
+    padding: 8px;
+    background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
-    
+    margin-right: 9px;
+    flex-shrink: 0;
+    width: calc(50% - 140px);
 }
-
-#gender input[type="button"]:last-child { margin-right: 0;}
 
 .form_item input[type="button"].active {
     background-color: #775E9D;
@@ -485,13 +478,13 @@ select {
 }
 
 #info {
-    margin-left: -140px;
+    margin-left: -175px;
     margin-bottom: 5px;
     font-size: 10px;
 }
 
 #password_info {
-    margin-left: -22px;
+    margin-left: -125px;
     margin-bottom: 5px;
     font-size: 10px;
 }
@@ -654,13 +647,3 @@ footer {
     display: flex;
     align-items: center;
    }
-   
-/* 모달창 X 버튼 스타일 수정 */
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #888;
-}

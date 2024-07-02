@@ -348,7 +348,7 @@ body {
     position: relative;
     bottom: 0;
     width: 100%;
-    top: 180px;
+    top: 200px;
   }
   
   .footer-wrapper {
@@ -461,10 +461,4 @@ body {
 
 #userDropdown a:hover {
   background-color: #f1f1f1;
-}
-
-.error-message {
-	color: red;
-	margin-bottom: 10px;
-	font-size: 11px;
 }

@@ -9,20 +9,17 @@
     background-color: white;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
+  }
   
-.header-container {
+  .header-container {
     background-color: #7150bd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     padding: 10px 0;
-    height: 100px;
-    position: relative;
-}
+    height: 100px; /* Fixed height */
+    position: relative; /* Add relative positioning */
+  }
   
   .logo-container {
     position: relative;
@@ -260,14 +257,17 @@
     color: #9270B1;
     padding: 20px;
     border-radius: 10px;
-    width: 500px;
+    width: 500px; /* 넓이를 500px로 조정 */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto; /* 추가: 상하좌우 가운데 정렬 */
-    margin-top: 50px; /* 추가: 상단 여백 */
-    margin-bottom: 50px; /* 추가: 하단 여백 */
+}
+
+
+.container {
+    text-align: center; /* 헤더를 가운데 정렬합니다. */
+    margin-bottom: 20px; /* 하단 여백을 조정합니다. */
 }
 
 .container > h2 {
@@ -277,26 +277,30 @@
 #findForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
+    align-items: center; /* 폼을 수직 중앙 정렬합니다. */
 }
 
 .form-group {
-    width: 100%;
-    margin-bottom: 10px;
+    width: 100%; /* 전체 폭을 차지하도록 설정 */
+    margin-bottom: 10px; /* 아래 여백 추가 */
 }
 
-.form-group > input::placeholder {
+.form-group > input::placeholder{
     color: #D2D2D2;
 }
+
 
 #name {
     margin-top: -40px;
 }
 
+.container {
+    text-align: center;
+}
+
 .form-group input[type="text"],
 .form-group input[type="email"] {
-    width: 100%;
+    width: 320px;
     height: 50px;
     padding: 10px;
     border: none;
@@ -317,17 +321,14 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    width: 100%;
+    width: 100%; /* 전체 폭을 차지하도록 설정 */
     font-size: 16px;
     margin-top: 10px;
 }
 
 #id-find:hover {
-    background-color: #775E9D;
+    background-color: #775E9D
 }
-
-
-
 
 .striped {
     display: flex;
@@ -363,10 +364,6 @@
 
 .login input[type="submit"]:hover {
     color: #775E9D
-}
-
-.login a {
-	text-decoration-line: none;
 }
 
 .modal {
@@ -449,7 +446,7 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-    top: 150px;
+    top: 1400px;
   }
   
   .footer-wrapper {
