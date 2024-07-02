@@ -1,6 +1,8 @@
 package com.lec.entity;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -42,7 +44,7 @@ public class Vote {
 
     @Column(name = "vote_end")
     private Date voteEnd;
-    
+   
     
     
     @Builder
