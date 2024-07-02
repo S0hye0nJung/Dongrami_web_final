@@ -26,7 +26,7 @@ public class SubcategoryService {
         Optional<Subcategory> optionalSubcategory = subcategoryRepository.findById(subcategoryId);
         optionalSubcategory.ifPresent(subcategory -> {
             subcategory.setCount(count);
-            subcategoryRepository.save(subcategory); // 업데이트된 count를 DB에 저장
+            subcategoryRepository.save(subcategory); // Update count in DB
         });
     }
     
@@ -34,7 +34,6 @@ public class SubcategoryService {
         return subcategoryRepository.findTop5ByOrderByCountDesc();
     }
 
-    // 추가된 메서드
     public Optional<Subcategory> findById(int id) {
         return subcategoryRepository.findById(id);
     }

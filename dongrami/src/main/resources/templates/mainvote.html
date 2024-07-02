@@ -8,6 +8,7 @@
 <html>
 	<head>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<title>동그라미</title>
@@ -30,22 +31,23 @@
 		    </div>
 
 			<div id="right-section">
-				      <!-- 로그인하지 않은 경우 -->
-				      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
-				               
-				       <!-- 로그인한 경우 -->
-				       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
-				            <a href="#" id="userName" class="dropdown-toggle">
-				                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
-				                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
-				            </a>
-				            <div id="userDropdown" class="dropdown-menu">
-				                 <a th:href="@{/mypage}">마이페이지</a>
-				                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
-				            </div>
-				        </div>
-				   </div>
-		  </div>
+			    <!-- 로그인하지 않은 경우 -->
+			    <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+			           
+			    <!-- 로그인한 경우 -->
+			    <div th:if="${session.loggedInUser != null}" id="userDropdownContainer"
+			         data-user-id="${session.loggedInUser.userId}"
+			         data-user-nickname="${session.loggedInUser.nickname}">
+			        <a href="#" id="userName" class="dropdown-toggle">
+			            <img src="/images/basic.png" alt="프로필 이미지" class="profile-img">
+			            <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+			        </a>
+			        <div id="userDropdown" class="dropdown-menu">
+			             <a th:href="@{/mypage}">마이페이지</a>
+			             <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+			        </div>
+			    </div>
+			</div>
 		</header>
 		
 
@@ -121,20 +123,22 @@
 			         <div id="vote-list" class="vote-list">
 			         
 			         </div>
+					 <div id="comment-section" class="comment-section">	</div>
+											
 					<div class="comment-container">
 					 <h3>댓글</h2>
-					 <div class="comment-input">
-					 				 <textarea id="commentText" rows="4" placeholder="댓글을 입력하세요..."></textarea>
-					 				<button id="submit" onclick="submitComment()">댓글 등록</button>
-					 </div> 
-			         
-			             <div id="comment-section" class="comment-section">
-			             
-			             </div>
-						 
-			             
-			          
-			     </div>
+						<form id="replyForm">
+								<span id="name1"th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+						        <input type="text" id="content" name="content" required><br><br>
+						        <input type="hidden" id="level" name="level" value="1"><br><br>
+						        <input type="hidden" id="voteId" name="voteId" value=""><br><br> <!-- hidden input -->
+						        <input type="hidden" id="userId" name="userId" th:value="${session.loggedInUser.userId}"><br><br> <!-- hidden input -->
+						        <input type="hidden" id="userNicknameInput" name="userNickname" th:value="${session.loggedInUser.nickname}"><br><br>
+						        <button type="submit" id="submitComment">댓글 작성</button>
+								
+						    </form>
+							<div id="pagination"></div>
+					</div>
 				 
 					<footer>
 					  <div class="footer-wrapper">

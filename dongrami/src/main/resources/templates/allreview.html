@@ -18,22 +18,22 @@
                 <span class="hover-text right-text">라미</span>
             </div>
         </div>
-		<div id="right-section">
-			      <!-- 로그인하지 않은 경우 -->
-			      <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
-			               
-			       <!-- 로그인한 경우 -->
-			       <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
-			            <a href="#" id="userName" class="dropdown-toggle">
-			                <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
-			                <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
-			            </a>
-			            <div id="userDropdown" class="dropdown-menu">
-			                 <a th:href="@{/mypage}">마이페이지</a>
-			                 <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
-			            </div>
-			        </div>
-			   </div>
+        <div id="right-section">
+            <!-- 로그인하지 않은 경우 -->
+            <a th:if="${session.loggedInUser == null}" th:href="@{/login}" id="loginButton">로그인 / 회원가입</a>
+           
+            <!-- 로그인한 경우 -->
+            <div th:if="${session.loggedInUser != null}" id="userDropdownContainer">
+                <a href="#" id="userName" class="dropdown-toggle">
+                    <img src="/images/mainlogo.png" alt="프로필 이미지" class="profile-img">
+                    <span th:text="${session.loggedInUser.nickname}">사용자 이름</span>
+                </a>
+                <div id="userDropdown" class="dropdown-menu">
+                     <a th:href="@{/mypage}">마이페이지</a>
+                     <a th:href="@{/auth/logout}" id="logoutButton">로그아웃</a>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 <section id="nav-section">
@@ -126,6 +126,10 @@
         </div>
     </div>
 </footer>
+<script th:inline="javascript">
+    window.userId = /*[[${session.loggedInUser.userId}]]*/ 'null';
+    window.userNickname = /*[[${session.loggedInUser.nickname}]]*/ 'Guest';
+</script>
 <script src="/js/allreview.js"></script>
 </body>
 </html>

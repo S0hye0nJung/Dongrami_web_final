@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pageReviews.forEach(review => {
             const reviewId = review.reviewId || 'invalid-id';
             const rating = review.rating ? review.rating : 0;
-            const nickname = review.memberNickname || '닉네임';
-            const subcategoryName = review.subcategory.bubble_slack_name || '소주제';
-            const subcategoryId = review.subcategory.subcategoryId; // 여기서 subcategoryId 값을 가져옵니다.
+            const nickname = review.nickname || '닉네임';
+            const subcategoryName = review.bubbleSlackName || '소주제';
+            const subcategoryId = review.subcategoryId; // 여기서 subcategoryId 값을 가져옵니다.
             const reviewCard = document.createElement('div');
             reviewCard.className = 'review-card';
             reviewCard.innerHTML = `
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="review-separator">|</div>
                             <div class="review-date">${new Date(review.reviewCreate).toLocaleDateString()}</div>
                             <div class="review-separator">|</div>
-                            <button class="next-button" data-id="${reviewId}">></button>
+                            <button class="next-button" data-subcategory-id="${subcategoryId}">></button>
                         </div>
                     </div>
                     <div class="review-divider"></div>
@@ -78,8 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextButtons = document.querySelectorAll('.next-button');
         nextButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                const id = event.target.getAttribute('data-id');
-                console.log('Next button clicked, review ID:', id);
+                const subcategoryId = event.target.getAttribute('data-subcategory-id');
+                console.log('Navigating to subcategory:', subcategoryId); // Debugging용 로그
+                if (subcategoryId) {
+                    window.location.href = `/tarot?subcategory_id=${subcategoryId}`;
+                } else {
+                    alert('유효한 서브카테고리 ID가 없습니다.');
+                }
             });
         });
 
@@ -170,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 star.classList.add('filled');
             } else if (index === Math.floor(averageRating)) {
                 const fractionalPart = averageRating - Math.floor(averageRating);
-                if (fractionalPart > 0) {
+                if (fractionalPart >= 0.5) {
                     star.classList.add('half-filled');
                 }
             }
@@ -193,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const updatedReview = {
             rating: parseInt($('#ratingScore').val()) || 0,
             reviewText: $('#review-text').val() || "",
-            userId: '1', // 실제 유저 아이디로 설정
+            userId: window.userId, // 실제 유저 아이디로 설정
             subcategoryId: parseInt(subcategoryId) || 0, // 가져온 subcategoryId 값을 설정합니다.
             resultId: 1 // 실제 결과 아이디로 설정
         };

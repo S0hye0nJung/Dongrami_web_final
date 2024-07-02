@@ -1,0 +1,128 @@
+/* comments.css */
+.container {
+    width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+}
+.profile-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+.camera-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    padding: 3px;
+}
+.profile-info {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+.profile-info .stats {
+    display: flex;
+    margin-top: 10px;
+}
+.profile-info .stats div {
+    margin-right: 20px;
+}
+.post-list-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.post-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+.post-item .select-post {
+    margin-right: 10px;
+}
+.post-content {
+    flex-grow: 1;
+}
+.post-subject {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.post-title {
+    font-size: 14px;
+    color: #555;
+}
+.post-date {
+    margin-right: 10px;
+    color: #888;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    flex-direction: column;
+}
+.dropdown-content.show {
+    display: flex;
+}
+.dropdown-content button {
+    background: #ffffff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 5px;
+    margin: 2px 0;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 함 */
+}
+.dropdown-content button:hover {
+    background-color: #aaa;
+}
+.pagination {
+    text-align: center;
+    padding: 20px 0;
+}
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+.pagination button.active {
+    font-weight: bold;
+    text-decoration: underline;
+}

@@ -89,27 +89,15 @@ public class AllReviewController {
         return ResponseEntity.ok(savedReview);
     }
 
-    @PostMapping("/saveResult")
-    public ResponseEntity<SavedResult> saveResult(@RequestBody AllReviewDTO reviewDTO) {
-        // Result 저장 로직 구현
-        SavedResult savedResult = new SavedResult();
-        // 필요한 데이터를 savedResult 객체에 설정합니다.
-        // savedResult.setSomeField(reviewDTO.getSomeField());
-        savedResultRepository.save(savedResult);
-
-        // 결과 ID를 포함한 응답 반환
-        return ResponseEntity.ok(savedResult);
-    }
-
     @GetMapping("/json")
-    public ResponseEntity<List<Review>> getAllReviewsJson() {
-        List<Review> reviews = allReviewService.getAllReviewsWithNicknames();
+    public ResponseEntity<List<AllReviewDTO>> getAllReviewsJson() {
+        List<AllReviewDTO> reviews = allReviewService.getAllReviewsWithNicknames();
         return ResponseEntity.ok(reviews);
     }
 
     @GetMapping
     public String getAllReviews(Model model) {
-        List<Review> reviews = allReviewService.getAllReviewsWithNicknames();
+        List<AllReviewDTO> reviews = allReviewService.getAllReviewsWithNicknames();
         model.addAttribute("reviews", reviews);
         return "allreview"; // Thymeleaf 템플릿 이름
     }

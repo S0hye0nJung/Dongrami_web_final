@@ -3,9 +3,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const prevPageButton = document.getElementById('prevPage');
     const nextPageButton = document.getElementById('nextPage');
     const currentPageSpan = document.getElementById('currentPage');
+    const pageNumbersDiv = document.getElementById('pageNumbers'); // 페이지 번호를 표시할 div 추가
     
+    let previousOption = null;
     let currentPage = 0;
     const pageSize = 3;
+    
     function fetchVotes(page) {
         fetch(`/api/votes/paged-votes?page=${page}&size=${pageSize}`)
             .then(response => response.json())
@@ -24,6 +27,21 @@ document.addEventListener("DOMContentLoaded", function() {
         currentPageSpan.textContent = data.number + 1;
         prevPageButton.disabled = data.first;
         nextPageButton.disabled = data.last;
+
+        // 페이지 번호 목록 업데이트
+        pageNumbersDiv.innerHTML = '';
+        for (let i = 0; i < data.totalPages; i++) {
+            const pageNumberButton = document.createElement('button');
+            pageNumberButton.textContent = i + 1;
+            pageNumberButton.addEventListener('click', function() {
+                currentPage = i;
+                fetchVotes(currentPage);
+            });
+            if (i === data.number) {
+                pageNumberButton.classList.add('current-page');
+            }
+            pageNumbersDiv.appendChild(pageNumberButton);
+        }
     }
 
     function createVoteElement(vote) {
@@ -59,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
         buttonContainer.appendChild(button2);
         voteDiv.appendChild(buttonContainer);
 
-       const barContainer1 = document.createElement('div');
+        const barContainer1 = document.createElement('div');
         barContainer1.classList.add('bar-container1');
         barContainer1.id = `barContainer1_${vote.voteId}`; // voteId를 사용하여 고유한 id 생성
         barContainer1.innerHTML = `
@@ -82,16 +100,15 @@ document.addEventListener("DOMContentLoaded", function() {
         const replyContainer = document.createElement('div');
         replyContainer.classList.add('reply-container');
         const replyButton = document.createElement('button');
-			replyButton.id = 'replyButton';
-			replyButton.textContent = '반응 보기';
-			replyButton.addEventListener('click', function() {
-    		window.location.href = `/mainvote?id=${vote.voteId}`;
-		});
-		replyContainer.appendChild(replyButton);
-		voteDiv.appendChild(replyContainer);
-		
+        replyButton.id = 'replyButton';
+        replyButton.textContent = '반응 보기';
+        replyButton.addEventListener('click', function() {
+            window.location.href = `/mainvote?id=${vote.voteId}`;
+        });
+        replyContainer.appendChild(replyButton);
+        voteDiv.appendChild(replyContainer);
+
         return voteDiv;
-        
     }
 
     window.voteOption = function(voteId, option) {
@@ -100,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ option: option }),
+            body: JSON.stringify({ option: option, previousOption: previousOption }),
         })
         .then(response => {
             if (!response.ok) {
@@ -111,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(updatedVote => {
             console.log('Vote successful:', updatedVote);
             updateVoteResults(updatedVote);
-            
+            previousOption = option; // 현재 선택을 이전 선택으로 저장
         })
         .catch(error => {
             console.error('Error voting:', error);
@@ -143,9 +160,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     nextPageButton.addEventListener('click', function() {
-        currentPage++;
-        fetchVotes(currentPage);
+        if (!nextPageButton.disabled) { // 다음 페이지 버튼이 활성화 상태일 때만 실행
+            currentPage++;
+            fetchVotes(currentPage);
+        }
     });
-    
+
     fetchVotes(currentPage); // 초기 로드
 });

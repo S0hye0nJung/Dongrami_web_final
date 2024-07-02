@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
-    @GetMapping("/comments")
+    @GetMapping("/reply")
     public String commentsPage() {
-        return "comments";
+        return "myreply";
     }
     
     @GetMapping("/result")
@@ -17,7 +17,7 @@ public class PageController {
     
     @GetMapping("/review")
     public String reviewPage() {
-        return "review";
+        return "allreview";
     }
     
     @GetMapping("/mypage")
@@ -32,7 +32,7 @@ public class PageController {
     }
     @GetMapping("/mainvote")
     public String mainvote() {
-    	return "mainvote";
+       return "mainvote";
     }
     @GetMapping("/vote")
     public String votePage() {
@@ -41,23 +41,27 @@ public class PageController {
     
     @GetMapping("/myreview")
     public String myReview() {
-    	return "myreview";
+       return "myreview";
     }
     
     @GetMapping("/mytarotlist")
     public String myTarotList() {
-    	return "mytarotlist";
+       return "mytarotlist";
     }
-    
+    @GetMapping("/adminreview")
+    public String adminReview() {
+       return "adminreview";
+    }
+
     @GetMapping("/find_Id")
     public String findId() {
-    	return "find_Id";
+       return "find_Id";
     }
     
     @GetMapping("/find_Pwd")
     public String findPwd() {
-    	return "find_Pwd";
+       return "find_Pwd";
     }
     
-    
+  
 }
