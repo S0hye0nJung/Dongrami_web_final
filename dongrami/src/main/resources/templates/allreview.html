@@ -127,8 +127,10 @@
     </div>
 </footer>
 <script th:inline="javascript">
-    window.userId = /*[[${session.loggedInUser.userId}]]*/ 'null';
-    window.userNickname = /*[[${session.loggedInUser.nickname}]]*/ 'Guest';
+    /*<![CDATA[*/
+    window.userId = /*[[${session.loggedInUser != null} ? ${session.loggedInUser.userId} : 'null']]*/ 'null';
+    window.userNickname = /*[[${session.loggedInUser != null} ? ${session.loggedInUser.nickname} : 'Guest']]*/ 'Guest';
+    /*]]>*/
 </script>
 <script src="/js/allreview.js"></script>
 </body>
