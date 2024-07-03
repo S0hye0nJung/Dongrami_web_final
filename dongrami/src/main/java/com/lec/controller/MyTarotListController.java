@@ -17,7 +17,7 @@ public class MyTarotListController {
     @Autowired
     private MyTarotListService myTarotListService;
 
-    @GetMapping("/my-tarot-list")
+    @GetMapping("/mytarotlist")
     public List<MyTarotListDTO> getMyTarotList() {
         return myTarotListService.getAllMyTarotList();
     }
