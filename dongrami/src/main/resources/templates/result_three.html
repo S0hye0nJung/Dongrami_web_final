@@ -78,11 +78,15 @@
                 <div class="icontent" id="future-content" th:text="${reading.reading3}"></div>
             </div>
         </div>
-        <div class="buttons">
-            <a th:href="@{/topic}" id="more-tarot">타로 더보기</a>
-            <a href="javascript:void(0);" id="save-result" data-web-reading-id="${reading.webReadingId}">저장</a>
-            <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
-        </div>
+		<div class="buttons">
+				    <a th:if="${session.loggedInUser == null}" th:href="@{/topic}" id="more-tarot">타로 더보기</a>
+				</div>
+						
+		<div class="buttons" th:if="${session.loggedInUser != null}">
+		    <a th:href="@{/topic}" id="more-tarot">타로 더보기</a>
+		    <a href="javascript:void(0);" id="save-result" th:data-web-reading-id="${reading.webReadingId}">저장</a>
+		    <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
+		</div>
     </div>
 
     <!-- Review Modal -->
@@ -137,8 +141,10 @@
 
     <!-- Scripts -->
     <script th:inline="javascript">
-        window.userId = /*[[${session.loggedInUser.userId}]]*/ 'null';
-        window.userNickname = /*[[${session.loggedInUser.nickname}]]*/ 'Guest';
+		/*<![CDATA[*/
+		    window.userId = /*[[${session.loggedInUser != null} ? ${session.loggedInUser.userId} : 'null']]*/ 'null';
+		    window.userNickname = /*[[${session.loggedInUser != null} ? ${session.loggedInUser.nickname} : 'Guest']]*/ 'Guest';
+		    /*]]>*/
     </script>
 
     <script src="./js/result.js"></script>
