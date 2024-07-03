@@ -51,7 +51,7 @@ public class Review {
     private Subcategory subcategory;
     
     @ManyToOne
-    @JoinColumn(name = "fk_result_id", 
+    @JoinColumn(name = "result_id", 
                 referencedColumnName = "result_id", 
                 nullable = true, 
                 foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
