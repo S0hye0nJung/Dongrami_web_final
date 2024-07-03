@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
-    @GetMapping("/reply")
-    public String commentsPage() {
-        return "myreply";
-    }
     
     @GetMapping("/result")
     public String resultPage() {
@@ -44,10 +40,6 @@ public class PageController {
        return "myreview";
     }
     
-    @GetMapping("/mytarotlist")
-    public String myTarotList() {
-       return "mytarotlist";
-    }
     @GetMapping("/adminreview")
     public String adminReview() {
        return "adminreview";
