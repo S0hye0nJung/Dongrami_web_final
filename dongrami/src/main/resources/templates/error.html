@@ -52,14 +52,14 @@
 			</section>
 
 			<div class="error_container">
-			    <div class="error_image">
-			        <img src="./images/basic.png" alt="" id="error_logo">
-			        <img src="./images/error.png" alt="" id="error_question">
-			    </div>
-			    <div class="error_msg">
-			        <span id="msg">Error 발생</span>
-			    </div>
-			</div>
+			        <div class="error_image">
+			            <img src="./images/basic.png" alt="" id="error_logo">
+			            <img src="./images/error.png" alt="" id="error_question">
+			        </div>
+			        <div class="error_msg">
+			            <span id="msg" th:text="${errorMsg}"></span>
+			        </div>
+		    </div>
 		<script th:src="@{/js/error.js}"></script>
     </body>
 </html>
